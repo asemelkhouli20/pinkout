@@ -1,0 +1,156 @@
+{
+  "hero": {
+    "width": 1667,
+    "height": 943,
+    "smallWidth": 650,
+    "smallHeight": 368,
+    "focus": "50% 50%"
+  },
+  "passage": {
+    "width": 1386,
+    "height": 1135,
+    "smallWidth": 650,
+    "smallHeight": 532,
+    "focus": "50% 50%"
+  },
+  "hub": {
+    "width": 1672,
+    "height": 941,
+    "smallWidth": 650,
+    "smallHeight": 366,
+    "focus": "50% 50%"
+  },
+  "beauty": {
+    "width": 1672,
+    "height": 941,
+    "smallWidth": 650,
+    "smallHeight": 366,
+    "focus": "50% 50%"
+  },
+  "make": {
+    "width": 1672,
+    "height": 941,
+    "smallWidth": 650,
+    "smallHeight": 366,
+    "focus": "50% 50%"
+  },
+  "market": {
+    "width": 1672,
+    "height": 941,
+    "smallWidth": 650,
+    "smallHeight": 366,
+    "focus": "50% 50%"
+  },
+  "move": {
+    "width": 1672,
+    "height": 941,
+    "smallWidth": 650,
+    "smallHeight": 366,
+    "focus": "50% 50%"
+  },
+  "live": {
+    "width": 1672,
+    "height": 941,
+    "smallWidth": 650,
+    "smallHeight": 366,
+    "focus": "50% 50%"
+  },
+  "hub-wide": {
+    "width": 1672,
+    "height": 941,
+    "smallWidth": 650,
+    "smallHeight": 366,
+    "focus": "50% 50%"
+  },
+  "make-room": {
+    "width": 1672,
+    "height": 941,
+    "smallWidth": 650,
+    "smallHeight": 366,
+    "focus": "50% 50%"
+  },
+  "market-wide": {
+    "width": 1672,
+    "height": 941,
+    "smallWidth": 650,
+    "smallHeight": 366,
+    "focus": "50% 50%"
+  },
+  "ballet": {
+    "width": 1448,
+    "height": 1086,
+    "smallWidth": 650,
+    "smallHeight": 488,
+    "focus": "50% 50%"
+  },
+  "live-wide": {
+    "width": 1672,
+    "height": 941,
+    "smallWidth": 650,
+    "smallHeight": 366,
+    "focus": "50% 50%"
+  },
+  "lounge": {
+    "width": 1672,
+    "height": 941,
+    "smallWidth": 650,
+    "smallHeight": 366,
+    "focus": "50% 50%"
+  },
+  "program-0": {
+    "width": 1532,
+    "height": 1026,
+    "smallWidth": 650,
+    "smallHeight": 435,
+    "focus": "50% 50%"
+  },
+  "program-1": {
+    "width": 584,
+    "height": 329,
+    "smallWidth": 584,
+    "smallHeight": 329,
+    "focus": "50% 50%"
+  },
+  "program-2": {
+    "width": 395,
+    "height": 700,
+    "smallWidth": 367,
+    "smallHeight": 650,
+    "focus": "50% 30%"
+  },
+  "program-3": {
+    "width": 588,
+    "height": 392,
+    "smallWidth": 588,
+    "smallHeight": 392,
+    "focus": "50% 30%"
+  },
+  "program-4": {
+    "width": 507,
+    "height": 700,
+    "smallWidth": 471,
+    "smallHeight": 650,
+    "focus": "50% 20%"
+  },
+  "program-5": {
+    "width": 394,
+    "height": 700,
+    "smallWidth": 366,
+    "smallHeight": 650,
+    "focus": "50% 45%"
+  },
+  "program-6": {
+    "width": 516,
+    "height": 687,
+    "smallWidth": 488,
+    "smallHeight": 650,
+    "focus": "50% 35%"
+  },
+  "program-7": {
+    "width": 525,
+    "height": 700,
+    "smallWidth": 487,
+    "smallHeight": 650,
+    "focus": "50% 35%"
+  }
+}
