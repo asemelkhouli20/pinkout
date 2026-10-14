@@ -2592,10 +2592,9 @@ summary::-webkit-details-marker {
       max-width: var(--max);
       margin: auto;
       padding: 24px var(--pad);
-      background: var(--blush);
+      background: #d6d6cb;
       color: var(--green);
       font-size: 15px;
-      border-block: 1px solid #03312e30;
       transform: rotate(-1.5deg);
       position: relative;
       z-index: 4
@@ -6471,10 +6470,10 @@ main,
       overflow: hidden;
       display: grid;
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-      align-items: center;
+      align-items: start;
       gap: clamp(30px, 4vw, 72px);
-      padding-block: 80px 145px;
-      min-height: 720px;
+      padding: 32px var(--pad);
+      min-height: 0;
       background: var(--ivory)
 }
 
@@ -6489,7 +6488,7 @@ main,
       max-width: none !important;
       pointer-events: none;
       z-index: 0;
-      background: radial-gradient(ellipse at 8% 0%, #febebc75, transparent 48%), linear-gradient(165deg, #f1ebe2 0%, #f8f4ee 43%, #febebc 78%, #f17dbd 100%)
+      background: radial-gradient(ellipse at 8% 0%, #a8c5ad75, transparent 48%), linear-gradient(165deg, #f1ebe2 0%, #f8f4ee 43%, #a8c5ad 78%, #628e70 100%)
 }
 
 .tea-liquid:before {
@@ -6630,10 +6629,9 @@ main,
 }
 
 .tea-stage-inner {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      align-items: end;
-      gap: 0 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       width: 100%;
       position: relative;
       padding: 20px 12px 0
@@ -6642,6 +6640,7 @@ main,
 .tea-cup {
       position: relative;
       width: 100%;
+      height: auto;
       min-width: 0;
       pointer-events: none;
       transform: rotate(-7deg);
@@ -6719,7 +6718,7 @@ main,
       .tea-about {
             grid-template-columns: minmax(0, 1fr);
             gap: 16px;
-            padding-block: 60px 115px;
+            padding-block: 32px;
             min-height: 0
       }
 

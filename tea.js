@@ -20,7 +20,7 @@
       scale=Math.min(1,1200/bounds.width,1200/bounds.height,Math.sqrt(550000/(bounds.width*bounds.height)));
       canvas.width=Math.max(1,Math.floor(bounds.width*scale));canvas.height=Math.max(1,Math.floor(bounds.height*scale));
       ctx.setTransform(scale,0,0,scale,0,0);
-      gradients=[['#febebc30','#f1ebe212'],['#febebc88','#f17dbd55'],['#f8f4eeb0','#f1ebe24d']].map(colors=>{
+      gradients=[['#a8c5ad30','#f1ebe212'],['#a8c5ad88','#628e7055'],['#f8f4eeb0','#f1ebe24d']].map(colors=>{
         const gradient=ctx.createLinearGradient(0,0,bounds.width*.3,bounds.height);
         gradient.addColorStop(0,colors[0]);gradient.addColorStop(1,colors[1]);return gradient;
       });
