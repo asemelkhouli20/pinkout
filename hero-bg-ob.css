@@ -1,0 +1,190 @@
+/* Hero layers */
+.hero-bg-ob {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.hero-bg-ob__content {
+  position: relative;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Keep hero links, buttons and forms interactive */
+.hero-bg-ob__content :is(
+  a, button, input, textarea, select, label,
+  summary, [role="button"], [tabindex], [contenteditable="true"]
+) {
+  pointer-events: auto;
+}
+
+.hero-bg-ob__stickers {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
+  overflow: hidden;
+}
+
+/* Sticker appearance + continuous floating */
+.hero-bg-ob__sticker {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: clamp(48px, var(--size), 140px);
+  height: auto;
+  display: block;
+  opacity: .92;
+
+  pointer-events: auto;
+  -webkit-user-drag: none;
+
+  transform: rotate(var(--angle));
+  translate: 0 0;
+  rotate: 0deg;
+  scale: 1;
+
+  animation: pinkout-float var(--duration, 7s) ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+
+  transition:
+    translate .4s cubic-bezier(.22, 1, .36, 1),
+    rotate .4s cubic-bezier(.22, 1, .36, 1),
+    scale .4s cubic-bezier(.22, 1, .36, 1);
+}
+
+/* Scattered positions */
+.hero-bg-ob__sticker:nth-child(1) {
+  --x: 3%; --y: 7%; --size: 8vw; --angle: -16deg;
+}
+
+.hero-bg-ob__sticker:nth-child(2) {
+  --x: 17%; --y: 2%; --size: 6vw; --angle: 12deg;
+}
+
+.hero-bg-ob__sticker:nth-child(3) {
+  --x: 1%; --y: 40%; --size: 8vw; --angle: 10deg;
+}
+
+.hero-bg-ob__sticker:nth-child(4) {
+  --x: 20%; --y: 72%; --size: 5.5vw; --angle: -12deg;
+}
+
+.hero-bg-ob__sticker:nth-child(5) {
+  --x: 85%; --y: 6%; --size: 8vw; --angle: 15deg;
+}
+
+.hero-bg-ob__sticker:nth-child(6) {
+  --x: 90%; --y: 40%; --size: 7vw; --angle: -10deg;
+}
+
+.hero-bg-ob__sticker:nth-child(7) {
+  --x: 73%; --y: 1%; --size: 7vw; --angle: -15deg;
+}
+
+.hero-bg-ob__sticker:nth-child(8) {
+  --x: 82%; --y: 73%; --size: 8vw; --angle: 12deg;
+}
+
+.hero-bg-ob__sticker:nth-child(9) {
+  --x: 4%; --y: 76%; --size: 7vw; --angle: -9deg;
+}
+
+.hero-bg-ob__sticker:nth-child(10) {
+  --x: 91%; --y: 65%; --size: 7vw; --angle: 15deg;
+}
+
+.hero-bg-ob__sticker:nth-child(11) {
+  --x: 15%; --y: 40%; --size: 5.5vw; --angle: -18deg;
+}
+
+.hero-bg-ob__sticker:nth-child(12) {
+  --x: 68%; --y: 79%; --size: 8vw; --angle: -12deg;
+}
+
+/* Different floating rhythms */
+.hero-bg-ob__sticker:nth-child(3n + 1) {
+  --duration: 6.5s;
+  --delay: -2s;
+  --drift: 6px;
+}
+
+.hero-bg-ob__sticker:nth-child(3n + 2) {
+  --duration: 8s;
+  --delay: -4s;
+  --drift: -7px;
+}
+
+.hero-bg-ob__sticker:nth-child(3n) {
+  --duration: 9s;
+  --delay: -6s;
+  --drift: 4px;
+}
+
+@keyframes pinkout-float {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(var(--angle));
+  }
+
+  50% {
+    transform:
+      translate3d(var(--drift, 5px), -12px, 0)
+      rotate(calc(var(--angle) + 4deg));
+  }
+}
+
+
+
+/* Mobile layout */
+@media (max-width: 767px) {
+  .hero-bg-ob__sticker {
+    width: clamp(42px, 12vw, 68px);
+    opacity: .65;
+  }
+
+  .hero-bg-ob__sticker:nth-child(1) {
+    --x: 1%; --y: 3%;
+  }
+
+  .hero-bg-ob__sticker:nth-child(2) {
+    --x: 26%; --y: 1%;
+  }
+
+  .hero-bg-ob__sticker:nth-child(5) {
+    --x: 83%; --y: 4%;
+  }
+
+  .hero-bg-ob__sticker:nth-child(7) {
+    --x: 60%; --y: 1%;
+  }
+
+  .hero-bg-ob__sticker:nth-child(8) {
+    --x: 82%; --y: 85%;
+  }
+
+  .hero-bg-ob__sticker:nth-child(9) {
+    --x: 1%; --y: 85%;
+  }
+
+  .hero-bg-ob__sticker:nth-child(3),
+  .hero-bg-ob__sticker:nth-child(4),
+  .hero-bg-ob__sticker:nth-child(6),
+  .hero-bg-ob__sticker:nth-child(10),
+  .hero-bg-ob__sticker:nth-child(11),
+  .hero-bg-ob__sticker:nth-child(12) {
+    display: none;
+  }
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .hero-bg-ob .hero-bg-ob__sticker {
+    animation: none;
+    transition: none;
+    translate: none;
+    rotate: none;
+    scale: 1;
+  }
+}
