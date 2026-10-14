@@ -42,22 +42,29 @@
     try { localStorage.setItem('pinkout.language', locale); } catch (_) {}
     applyTranslations();
   });
-  function closeMenu(restore = false) {
-    $('#navigation').classList.remove('open');
-    $('#menu').setAttribute('aria-expanded', 'false');
-    if (restore) $('#menu').focus();
+  const menu = $('#menu'), navigation = $('#navigation');
+  if (menu && navigation) {
+    function closeMenu(restore = false) {
+      navigation.classList.remove('open');
+      menu.setAttribute('aria-expanded', 'false');
+      menu.dataset.label = 'nav.menuOpen';
+      menu.setAttribute('aria-label', tr('nav.menuOpen'));
+      if (restore) menu.focus();
+    }
+    menu.addEventListener('click', () => {
+      const open = menu.getAttribute('aria-expanded') !== 'true';
+      menu.setAttribute('aria-expanded', String(open));
+      menu.dataset.label = open ? 'nav.menuClose' : 'nav.menuOpen';
+      menu.setAttribute('aria-label', tr(menu.dataset.label));
+      navigation.classList.toggle('open', open);
+      if (open) navigation.querySelector('a')?.focus();
+    });
+    $$('#navigation a').forEach(el => el.addEventListener('click', () => closeMenu()));
+    document.addEventListener('click', e => { if (!e.target.closest('.header')) closeMenu(); });
+    document.addEventListener('focusin', e => { if (!e.target.closest('.header')) closeMenu(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && navigation.classList.contains('open')) closeMenu(true); });
+    window.addEventListener('resize', () => { if (window.innerWidth > 1100) closeMenu(); }, {passive:true});
   }
-  $('#menu').addEventListener('click', () => {
-    const open = $('#menu').getAttribute('aria-expanded') !== 'true';
-    $('#menu').setAttribute('aria-expanded', String(open));
-    $('#navigation').classList.toggle('open', open);
-    if (open) $('#navigation a').focus();
-  });
-  $$('#navigation a').forEach(el => el.addEventListener('click', () => closeMenu()));
-  document.addEventListener('click', e => { if (!e.target.closest('.header')) closeMenu(); });
-  document.addEventListener('focusin', e => { if (!e.target.closest('.header')) closeMenu(); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape' && $('#navigation').classList.contains('open')) closeMenu(true); });
-  window.addEventListener('resize', () => { if (window.innerWidth > 1100) closeMenu(); }, {passive:true});
   function setWorld(key, animate = true) {
     selectedWorld = key;
     const world = worlds.find(w => w.key === key);
