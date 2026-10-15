@@ -1595,3 +1595,81 @@ main,
 }
 
 #world-details .detail-orbit[hidden] { display: none }
+
+/* Keep the full green surface; set the existing journey as journal columns. */
+#journey {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      column-gap: clamp(28px, 6vw, 90px);
+      row-gap: 28px;
+      align-items: end;
+      padding-top: clamp(100px, 9vw, 135px)
+}
+.journey-ripple {
+      position: absolute;
+      display: block;
+      inset: -1px -1px auto;
+      width: calc(100% + 2px);
+      height: clamp(48px, 5vw, 72px);
+      pointer-events: none
+}
+#journey > h2 {
+      margin: 0;
+      font-size: clamp(30px, 3.8vw, 52px);
+      font-weight: 400;
+      line-height: 1.5;
+      text-wrap: balance
+}
+#journey > .lead { margin: 0; max-width: 56ch; line-height: 2 }
+#journey .journey-stops {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: clamp(20px, 3vw, 42px);
+      margin: 16px 0 0
+}
+#journey .journey-stops li {
+      display: block;
+      margin: 0;
+      padding: 20px 0 0;
+      border-top: 1px solid #f1ebe24d;
+      text-align: start
+}
+#journey .journey-stops li > span {
+      display: block;
+      margin: 0 0 18px;
+      color: var(--blush);
+      font: italic 400 clamp(38px, 4vw, 58px)/1 Georgia, serif;
+      direction: ltr;
+      text-align: start
+}
+html[dir="rtl"] #journey .journey-stops li > span { text-align: right }
+#journey .journey-stops h3 { margin: 0 0 12px; font-size: 18px; line-height: 1.8; font-weight: 600 }
+#journey .journey-stops p { margin: 0; line-height: 2; font-size: 13px }
+#journey > .caption {
+      grid-column: 1 / -1;
+      margin: 12px 0 0;
+      padding-top: 20px;
+      border-top: 1px solid #f1ebe230;
+      font-size: 11px;
+      line-height: 1.9
+}
+@media (min-width: 651px) and (max-width: 1000px) {
+      #journey .journey-stops { grid-template-columns: repeat(6, minmax(0, 1fr)) }
+      #journey .journey-stops li { grid-column: span 2 }
+      #journey .journey-stops li:nth-child(-n+2) { grid-column: span 3 }
+}
+@media (max-width: 650px) {
+      #journey { grid-template-columns: minmax(0, 1fr); row-gap: 18px; padding-top: 86px }
+      #journey > h2 { font-size: 30px }
+      #journey .journey-stops { grid-template-columns: minmax(0, 1fr); margin-top: 8px; gap: 22px }
+      #journey .journey-stops li {
+            display: grid;
+            grid-template-columns: 48px minmax(0, 1fr);
+            gap: 8px 18px;
+            padding-top: 22px
+      }
+      #journey .journey-stops li > span { grid-row: 1 / 3; margin: 0; font-size: 38px }
+      #journey .journey-stops h3 { margin: 0; font-size: 18px }
+      #journey .journey-stops p { grid-column: 2; font-size: 13px }
+}
