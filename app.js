@@ -432,7 +432,11 @@
       const number = document.createElement('span'); number.className = 'route-num'; number.textContent = `0${index+1}`; number.setAttribute('aria-hidden','true');
       const name = document.createElement('h4'); name.textContent = w.name; name.lang = 'en';
       const text = document.createElement('p'); text.textContent = tr(`inside.${key}.heading`);
-      card.append(img,number,name,text); container.append(card);
+      const detail = document.createElement('button'); detail.type = 'button'; detail.className = 'route-open';
+      detail.textContent = tr('ui.panel');
+      detail.setAttribute('aria-label', `${tr('ui.panel')} — ${w.name}`);
+      detail.addEventListener('click', () => openWorldDetails(key, detail));
+      card.append(img,number,name,text,detail); container.append(card);
     });
     if (animate) window.PinkOutMotion?.refresh(container);
   }

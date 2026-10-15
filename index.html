@@ -14,8 +14,8 @@
       <meta property="og:image" content="https://pinkoutsa.com/assets/photographic/hero.webp">
       <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
       <link rel="preload" href="assets/alexandria-regular.ttf" as="font" type="font/ttf" crossorigin="">
-      <script defer src="content.js?v=20261015-one-word-moments"></script>
-      <script defer src="app.js?v=20261015-no-program-filters"></script>
+      <script defer src="content.js?v=20261015-day-planner-restored"></script>
+      <script defer src="app.js?v=20261015-day-planner-restored"></script>
       <link rel="stylesheet" href="styles.css?v=20261014-green-tea">
       <link rel="canonical" href="https://pinkoutsa.com/">
       <script defer src="program-effects.js?v=20261015-full-burst"></script>
@@ -23,7 +23,7 @@
       <script defer src="motion.js?v=20261014-gallery-layout"></script>
       <script defer src="tea-physics.js?v=20261014-gallery-layout"></script>
       <script defer src="tea.js?v=20261014-green-tea"></script>
-      <link rel="stylesheet" href="layout.css?v=20261015-centered-program-eyebrow">
+      <link rel="stylesheet" href="layout.css?v=20261015-day-planner-restored">
       <link rel="stylesheet" href="hero-bg-ob.css">
 
 </head>
@@ -931,31 +931,33 @@
                                     </svg></button></div>
                   </div>
             </section>
-            <section id="day" class="section day">
-                  <div class="day-heading reveal">
-                        <p class="eyebrow" data-i18n="day.eyebrow">جولة صغيرة، اختيارات كثيرة</p>
-                        <h2 data-i18n="day.title">اليوم، على أي مزاج؟</h2>
-                        <p class="lead" data-i18n="day.lead">اختاري اللي ودّك فيه، ونرتّب لك جولة تخيّلية من أربع محطات.
-                              أو خلي الاختيار مفاجأة.</p>
-                  </div>
+            <section id="day" class="section day" aria-labelledby="day-title">
+                 
+                  <div class="day-planner">
+                  <aside class="day-controls" aria-labelledby="day-controls-title">
+                        <p class="day-control-index" lang="en">01 / 02</p>
+                        <h3 id="day-controls-title" data-i18n="day.controlsTitle">اختاري مزاج اليوم</h3>
                   <div class="day-picker" role="group" aria-label="اليوم، على أي مزاج؟" data-label="day.title">
-                        <button type="button" data-mood="create" class="mood active" aria-pressed="true"><span
+                        <button type="button" data-mood="create" class="mood active" aria-pressed="true"><span class="mood-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m14 4 6-2-2 6-8 8-4-4ZM6 12c-4 0-2 7-5 9 7 1 10-3 9-5"/></svg></span><span
                                     data-i18n="day.create">أبدع</span></button><button type="button" data-mood="glow"
-                              class="mood" aria-pressed="false"><span data-i18n="day.glow">أتجمّل</span></button><button
-                              type="button" data-mood="move" class="mood" aria-pressed="false"><span
+                              class="mood" aria-pressed="false"><span class="mood-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5Z"/></svg></span><span data-i18n="day.glow">أتجمّل</span></button><button
+                              type="button" data-mood="move" class="mood" aria-pressed="false"><span class="mood-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM4 10l8-2 8 2m-8-2v7m0-2-6 8m6-8 6 8"/></svg></span><span
                                     data-i18n="day.move">أتحرّك</span></button><button type="button" data-mood="shop"
-                              class="mood" aria-pressed="false"><span data-i18n="day.shop">أتسوّق</span></button><button
-                              type="button" data-mood="discover" class="mood" aria-pressed="false"><span
+                              class="mood" aria-pressed="false"><span class="mood-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7h14l2 14H3ZM8 8V6a4 4 0 0 1 8 0v2"/></svg></span><span data-i18n="day.shop">أتسوّق</span></button><button
+                              type="button" data-mood="discover" class="mood" aria-pressed="false"><span class="mood-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0ZM15 9l-2 4-4 2 2-4Z"/></svg></span><span
                                     data-i18n="day.discover">أكتشف</span></button>
                   </div>
+                        <button type="button" id="surprise" class="chip"><span data-i18n="ui.random">اختاري لي
+                                          جولة</span> </button>
+                  </aside>
                   <div class="day-result">
                         <div class="day-pass-top">
                               <bdi>PinkOut</bdi><span data-i18n="day.pass">جواز يومك التخيّلي</span>
                         </div>
                         <div class="day-result-head">
                               <h3 data-i18n="day.resultTitle">جولتك ممكن تبدأ كذا</h3>
-                              <button type="button" id="surprise" class="chip"><span data-i18n="ui.random">اختاري لي
-                                          جولة</span> </button>
+
+
                         </div>
                         <div id="day-route" class="route" aria-live="polite"></div>
                         <p class="caption" data-i18n="day.note">جولة للإلهام فقط؛ ما فيها حجوزات أو مواعيد أو ضمان توفر
@@ -964,6 +966,7 @@
                               <span data-i18n="day.souvenir">أربع محطات. وعلى راحتك.</span><span class="day-pass-dots"
                                     aria-hidden="true"></span><span lang="en">PINKOUT / 04 STOPS</span>
                         </div>
+                  </div>
                   </div>
             </section>
             <section id="app" class="section app">

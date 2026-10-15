@@ -156,6 +156,10 @@ window.PINKOUT = {
       "ar": "الصور تصوّرات تصميمية وقد تختلف المساحات والأنشطة عند التنفيذ.",
       "en": "Images are design concepts; finished spaces and activities may differ."
     },
+    "day.controlsTitle": {
+      "ar": "اختاري مزاج اليوم",
+      "en": "Choose your mood"
+    },
     "day.title": {
       "ar": "اليوم، على أي مزاج؟",
       "en": "What is your kind of day?"

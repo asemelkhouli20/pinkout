@@ -535,9 +535,9 @@ main,
 #gallery:before {
       content: '';
       position: absolute;
-      inset: 0 0 auto;
-      height: 260px;
-      background: radial-gradient(ellipse at 65% 0, #febebc66, transparent 66%);
+      inset: -80px 0 auto;
+      height: clamp(240px, 25vw, 360px);
+      background: radial-gradient(ellipse at 50% 48%, #febebc2e 0%, #febebc12 42%, transparent 74%);
       pointer-events: none;
       z-index: -1
 }
@@ -2045,4 +2045,129 @@ html[dir="rtl"] #journey .journey-stops li > span { text-align: right }
       margin-inline: auto;
       text-align: center;
       justify-content: center
+}
+
+/* A quiet, continuous join from the patterned programs to the photo gallery. */
+#happening { padding-bottom: clamp(40px, 4vw, 64px) }
+#gallery { padding-top: clamp(40px, 4vw, 64px) }
+
+/* Dotted art-book paper and a clear mood-to-route planner. */
+#day {
+      position: relative;
+      isolation: isolate;
+      background: var(--paper)
+}
+#day::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url("assets/illustrations/day-dot-paper.svg") 0 0 / 48px 48px repeat;
+      mask-image: linear-gradient(to bottom, transparent, #000 70px, #000 calc(100% - 70px), transparent);
+      -webkit-mask-image: linear-gradient(to bottom, transparent, #000 70px, #000 calc(100% - 70px), transparent);
+      z-index: -1;
+      pointer-events: none
+}
+#day .day-heading { max-width: 820px; margin: 0 auto 36px; text-align: center }
+#day .day-heading h2 { margin: 12px 0 18px; font-size: clamp(30px, 4vw, 48px); line-height: 1.5; font-weight: 400 }
+#day .day-heading .lead { max-width: 60ch; font-size: 15px; line-height: 2 }
+.day-planner { display: grid; grid-template-columns: minmax(220px, .65fr) minmax(0, 2fr); gap: 26px; align-items: start }
+.day-controls {
+      padding: 26px;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: var(--paper);
+      box-shadow: 0 10px 26px #03312e08
+}
+.day-control-index { margin: 0 0 12px; font: 11px/1.5 Arial, sans-serif; color: var(--muted) }
+#day .day-controls h3 { margin: 0; font-size: 20px; line-height: 1.7; color: var(--green) }
+#day .day-picker { display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; margin: 24px 0; max-width: none }
+#day .mood {
+      display: flex;
+      align-items: center;
+      justify-content: start;
+      gap: 12px;
+      min-height: 52px;
+      padding: 12px 16px;
+      border-radius: 14px;
+      background: var(--ivory);
+      color: var(--green);
+      text-align: start;
+      font-size: 14px
+}
+.mood-icon { display: grid; place-items: center; flex: none; width: 24px; height: 24px }
+.mood-icon svg { display: block; width: 23px; height: 23px }
+#day .mood.active { background: var(--green); color: var(--paper); border-color: var(--green) }
+#day .mood.active::after { content: "✓"; margin-inline-start: auto; font: 16px/1 Arial, sans-serif }
+#day .mood:focus-visible, #day .route-open:focus-visible { outline: 3px solid var(--pink); outline-offset: 3px }
+#day #surprise {
+      width: 100%;
+      min-height: 48px;
+      padding: 12px 16px;
+      border-radius: 14px;
+      background: #fbe4df;
+      color: var(--green);
+      border: 1px solid #e7c9c4;
+      font-size: 13px
+}
+#day .day-result {
+      min-width: 0;
+      padding: clamp(22px, 3vw, 36px);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: var(--paper);
+      box-shadow: 0 10px 26px #03312e08
+}
+#day .day-pass-top { gap: 16px; padding-bottom: 18px; font-size: 11px }
+#day .day-result-head { margin: 24px 0 }
+#day .day-result-head h3 { margin: 0; font-size: clamp(21px, 2vw, 28px); line-height: 1.6 }
+#day .route { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px }
+#day .route-stop {
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+      min-width: 0;
+      padding: 0 0 18px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      overflow: hidden;
+      background: var(--ivory)
+}
+#day .route-stop img { display: block; width: 100%; height: 140px; border-radius: 0; object-fit: cover }
+#day .route-num { top: 12px; inset-inline-start: 12px; width: 30px; height: 30px; background: var(--paper); font: 12px/30px Arial, sans-serif }
+#day .route-stop h4 { margin: 18px 18px 8px; font-size: 17px; line-height: 1.5 }
+#day .route-stop p { margin: 0 18px 18px; font-size: 13px; line-height: 1.8 }
+#day .route-open {
+      margin: auto 18px 0;
+      padding: 0 0 3px;
+      border: 0;
+      border-bottom: 1px solid currentColor;
+      border-radius: 0;
+      background: transparent;
+      color: var(--green);
+      font-size: 12px;
+      line-height: 1.8
+}
+#gallery { padding-bottom: 0px;;}
+#day .day-result > .caption { margin: 24px 0 0; font-size: 11px; line-height: 1.9;padding-top: 0px; }
+#day .day-pass-footer { gap: 14px; margin-top: 22px; padding-top: 18px; font-size: 10px; flex-wrap: wrap }
+@media (hover: hover) {
+      #day .mood:not(.active):hover { background: #fbe4df; border-color: #e7c9c4; color: var(--green) }
+      #day .route-open:hover { color: #8a415f }
+}
+@media (max-width: 900px) {
+      .day-planner { grid-template-columns: minmax(0, 1fr); gap: 20px }
+      #day .day-picker { grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 20px 0 }
+      #day .day-controls { padding: 24px }
+      #day #surprise { width: auto; min-width: 180px }
+}
+@media (max-width: 550px) {
+      #day .day-heading { margin-bottom: 26px }
+      #day .day-heading .lead { font-size: 14px }
+      #day .day-picker { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px }
+      #day .mood { font-size: 13px; gap: 8px; padding: 12px }
+      #day .day-controls, #day .day-result { padding: 20px; border-radius: 20px }
+      #day #surprise { width: 100% }
+      #day .route { grid-template-columns: minmax(0, 1fr); gap: 16px }
+      #day .route-stop img { height: 170px }
+      #day .day-pass-top { align-items: start; flex-wrap: wrap }
 }
