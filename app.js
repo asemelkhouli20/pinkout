@@ -175,14 +175,114 @@
     else { const forward = e.key === 'ArrowDown' || e.key === (locale === 'ar' ? 'ArrowLeft' : 'ArrowRight'); next = (index + (forward ? 1 : -1) + buttons.length) % buttons.length; }
     buttons[next].focus(); buttons[next].click();
   });
+  // Small inline icons keep the popup artwork sharp without image downloads.
+  const detailIconPaths = {
+    arch: 'M5 21V10a7 7 0 0 1 14 0v11M9 21V10a3 3 0 0 1 6 0v11M3 21h18',
+    sparkle: 'm12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5ZM20 2v4m-2-2h4',
+    camera: 'M8 6 10 3h4l2 3h4v14H4V6ZM16 13a4 4 0 1 1-8 0 4 4 0 0 1 8 0',
+    flower: 'M12 12c-10-2-6-12 0-5 6-7 10 3 0 5Zm0 0c10 2 6 12 0 5-6 7-10-3 0-5ZM12 14v8m0-3 5-3',
+    coffee: 'M4 8h12v7a6 6 0 0 1-12 0ZM16 9h2a3 3 0 0 1 0 6h-2M3 22h15M7 2v3m5-3v3',
+    leaf: 'M20 3C8 2 2 7 5 15s17 6 15-12ZM5 20 16 9M9 16v-5m0 5h5',
+    chat: 'M21 11a9 8 0 0 1-9 8H7l-5 3 2-6a8 8 0 0 1-1-5 9 8 0 0 1 18 0ZM7 10h10m-10 4h6',
+    heart: 'M20 5a5 5 0 0 0-8 1 5 5 0 0 0-8-1c-5 5 3 10 8 15 5-5 13-10 8-15Z',
+    perfume: 'M8 3h8v4H8ZM10 7v3m4-3v3M6 10h12l2 11H4ZM9 14h6v4H9Z',
+    palette: 'M12 3a9 9 0 1 0 0 18h1a2 2 0 0 0 0-4c-2-1 0-3 2-3h3c5 0 3-11-6-11ZM7 8h.01M12 6h.01M17 9h.01M6 13h.01',
+    brush: 'm14 4 6-2-2 6-8 8-4-4ZM6 12c-4 0-2 7-5 9 7 1 10-3 9-5',
+    scissors: 'M9 17 20 3M9 7l11 14M9 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm0 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z',
+    gem: 'M3 8 7 3h10l4 5-9 14ZM3 8h18M7 3l5 19 5-19',
+    bag: 'M5 7h14l2 14H3ZM8 8V6a4 4 0 0 1 8 0v2',
+    hanger: 'M10 5a2 2 0 1 1 3 2l-1 1v3L2 18v2h20v-2l-10-7',
+    sun: 'M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0ZM12 1v3m0 16v3M1 12h3m16 0h3M4 4l2 2m12 12 2 2M4 20l2-2M18 6l2-2',
+    move: 'M14 4a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM4 10l8-2 8 2m-8-2v7m0-2-6 8m6-8 6 8',
+    music: 'M9 18V5l11-2v13M9 9l11-2M9 18a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm11-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z',
+    mic: 'M9 5a3 3 0 0 1 6 0v7a3 3 0 0 1-6 0ZM6 10v2a6 6 0 0 0 12 0v-2M12 18v4m-4 0h8',
+    ticket: 'M3 5h18v5a2 2 0 0 0 0 4v5H3v-5a2 2 0 0 0 0-4ZM15 5v3m0 3v2m0 3v3'
+  };
+  const detailThemes = {
+    passage: ['arch', 'sparkle', 'gem', 'camera', 'flower'],
+    hub: ['coffee', 'leaf', 'chat', 'sparkle', 'heart'],
+    beauty: ['sparkle', 'perfume', 'palette', 'gem', 'flower'],
+    make: ['brush', 'gem', 'scissors', 'palette', 'heart'],
+    market: ['bag', 'hanger', 'gem', 'heart', 'sparkle'],
+    move: ['move', 'flower', 'music', 'heart', 'leaf'],
+    live: ['mic', 'music', 'chat', 'sparkle', 'ticket']
+  };
+  const detailIcon = name => `<svg class="detail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="${detailIconPaths[name]}"/></svg>`;
   const worldDetails = $('#world-details');
   let worldDetailsReturnFocus = null;
   let worldDetailsKey = 'passage';
+  function scatterDetailIcons(width, height, card, size, count, random = Math.random) {
+    const edge = width <= 600 ? 3 : 14;
+    const sideRoom = Math.min(card.left, width - card.right);
+    const gap = Math.max(2, Math.min(16, sideRoom - size - edge - 8));
+    const minY = Math.max(edge + 10, card.top + 18);
+    const maxY = Math.min(height - size - edge - 20, card.top + (card.bottom - card.top) * .74);
+    const zones = [
+      {left: Math.max(edge, card.left - gap - size - 28), right: card.left - gap - size - 4},
+      {left: card.right + gap + 1, right: Math.min(width - size - edge - 4, card.right + gap + 25)}
+    ];
+    const positions = [];
+    const rows = Math.ceil(count / 2);
+    const band = (maxY - minY) / rows;
+    const firstSide = random() < .5 ? 0 : 1;
+    for (let index = 0; index < count; index++) {
+      const zone = zones[(index + firstSide) % 2];
+      if (zone.right < zone.left || band <= 0) break;
+      const row = Math.floor(index / 2);
+      const x = zone.left + random() * (zone.right - zone.left);
+      // One icon per vertical band on each side guarantees clear, balanced spacing.
+      const y = minY + band * (row + .15 + random() * .2);
+      positions.push({x, y});
+    }
+    return positions;
+  }
+  function positionDetailIcons() {
+    if (!worldDetails.open) return;
+    const icons = [...$('#world-details-orbits').children];
+    const positions = scatterDetailIcons(window.innerWidth, window.innerHeight,
+      worldDetails.getBoundingClientRect(), window.innerWidth <= 600 ? 20 : 32, icons.length);
+    icons.forEach((element, index) => {
+      element.hidden = !positions[index];
+      if (positions[index]) {
+        element.style.left = `${positions[index].x}px`;
+        element.style.top = `${positions[index].y}px`;
+      }
+    });
+  }
+  let detailResizeFrame;
+  window.addEventListener('resize', () => {
+    if (!worldDetails.open) return;
+    cancelAnimationFrame(detailResizeFrame);
+    detailResizeFrame = requestAnimationFrame(positionDetailIcons);
+  }, {passive:true});
   function openWorldDetails(key, trigger = $('#world-detail')) {
     const world = worlds.find(item => item.key === key);
     if (!world) return;
     const alreadyOpen = worldDetails.open;
     worldDetailsKey = key;
+    worldDetails.dataset.world = key;
+    $('#world-details-emblem').innerHTML = detailIcon(detailThemes[key][0]);
+    const ornaments = [...detailThemes[key], detailThemes[key][0]];
+    for (let index = ornaments.length - 1; index > 0; index--) {
+      const swap = Math.floor(Math.random() * (index + 1));
+      [ornaments[index], ornaments[swap]] = [ornaments[swap], ornaments[index]];
+    }
+    $('#world-details-orbits').innerHTML = ornaments.map((name, index) => {
+      const angle = -18 + Math.random() * 36;
+      const duration = 5 + Math.random() * 4;
+      const delay = .3 + Math.random() * .65;
+      const phase = -Math.random() * 8;
+      return `<span class="detail-orbit" style="--orbit-angle:${angle.toFixed(2)}deg;--orbit-duration:${duration.toFixed(2)}s;--appear-delay:${delay.toFixed(2)}s;--orbit-delay:${phase.toFixed(2)}s">${detailIcon(name)}</span>`;
+    }).join('');
+    const image = $(`#inside-${key} .story-image`);
+    let mood = image.querySelector('.world-details-mood');
+    if (!mood) {
+      mood = document.createElement('span');
+      mood.className = 'world-details-mood';
+      mood.setAttribute('aria-hidden', 'true');
+      mood.innerHTML = detailThemes[key].slice(0, 3).map(detailIcon).join('');
+      image.append(mood);
+    }
     $('#world-details-position').textContent = `${String(worlds.indexOf(world) + 1).padStart(2, '0')} / ${String(worlds.length).padStart(2, '0')}`;
     $$('.world-detail-story').forEach(story => { story.hidden = story.id !== `inside-${key}`; });
     $('#world-details-title').textContent = world.name;
@@ -191,6 +291,7 @@
       worldDetails.showModal();
     }
     document.body.classList.add('scroll-lock');
+    positionDetailIcons();
     $('.world-details-body').scrollTop = 0;
     if (!alreadyOpen) $('#world-details-close').focus({preventScroll:true});
   }
@@ -249,7 +350,13 @@
   function renderHighlights() {
     $$('[data-highlights]').forEach(el => {
       el.replaceChildren(...tr(el.dataset.highlights).split(' · ').map((label,index) => {
-        const chip=document.createElement('span'); chip.textContent=label; return chip;
+        const chip=document.createElement('span'); chip.textContent=label;
+        const story = el.closest('.world-detail-story');
+        if (story) {
+          const names = detailThemes[story.id.replace('inside-', '')];
+          chip.insertAdjacentHTML('afterbegin', detailIcon(names[index % names.length]));
+        }
+        return chip;
       }));
     });
   }

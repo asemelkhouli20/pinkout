@@ -1325,8 +1325,8 @@ main,
 #world-details .caption { margin: 28px 0 0; color: var(--muted); font-size: 12px }
 #world-details[open] { animation: world-details-enter .24s ease-out }
 @keyframes world-details-enter {
-      from { opacity: 0; transform: translateY(12px) }
-      to { opacity: 1; transform: translateY(0) }
+      from { opacity: 0 }
+      to { opacity: 1 }
 }
 @media (max-width: 600px) {
       #world-details {
@@ -1411,3 +1411,187 @@ main,
 @media (max-width: 600px) {
       .world-details-nav { padding: 10px 18px }
 }
+
+/* Each popup borrows its atmosphere from the world inside it. */
+#world-details {
+      --detail-accent: #8a415f;
+      --detail-soft: #f5e2e9;
+      --detail-surface: #fcf6f6;
+      background: var(--detail-surface)
+}
+#world-details[data-world="passage"] {
+      --detail-accent: #885172;
+      --detail-soft: #f3dce9;
+      --detail-surface: #fcf5f8
+}
+#world-details[data-world="hub"] {
+      --detail-accent: #52684a;
+      --detail-soft: #e3ebd9;
+      --detail-surface: #f6f6ec
+}
+#world-details[data-world="beauty"] {
+      --detail-accent: #98546a;
+      --detail-soft: #f4dce4;
+      --detail-surface: #fdf3f5
+}
+#world-details[data-world="make"] {
+      --detail-accent: #996044;
+      --detail-soft: #f3dfca;
+      --detail-surface: #fcf5ea
+}
+#world-details[data-world="market"] {
+      --detail-accent: #796137;
+      --detail-soft: #ede3c7;
+      --detail-surface: #faf7eb
+}
+#world-details[data-world="move"] {
+      --detail-accent: #4f7167;
+      --detail-soft: #dcebe4;
+      --detail-surface: #f1f7f2
+}
+#world-details[data-world="live"] {
+      --detail-accent: #70588f;
+      --detail-soft: #e9dff4;
+      --detail-surface: #f7f3fc
+}
+#world-details .world-details-header,
+#world-details .world-details-nav {
+      background: var(--detail-soft);
+      border-color: transparent
+}
+#world-details-title { flex: 1; color: var(--detail-accent) }
+#world-details .detail-icon { display: block; width: 24px; height: 24px; flex: none }
+#world-details-emblem {
+      display: grid;
+      place-items: center;
+      flex: none;
+      width: 48px;
+      height: 48px;
+      border: 1px solid currentColor;
+      border-radius: 16px;
+      color: var(--detail-accent);
+      background: var(--detail-surface)
+}
+#world-details-emblem .detail-icon { width: 28px; height: 28px }
+#world-details[data-world="passage"] #world-details-emblem { border-radius: 24px 24px 8px 8px }
+#world-details[data-world="make"] #world-details-emblem { border-radius: 8px 20px 8px 20px }
+#world-details[data-world="move"] #world-details-emblem { border-radius: 50% }
+#world-details[data-world="live"] #world-details-emblem { border-style: dashed }
+#world-details .world-details-body {
+      background: radial-gradient(ellipse at 100% 0, var(--detail-soft), transparent 55%), var(--detail-surface)
+}
+#world-details .world-details-mood {
+      position: absolute;
+      top: 14px;
+      inset-inline-start: 14px;
+      display: flex;
+      gap: 12px;
+      padding: 12px 16px;
+      border: 1px solid var(--detail-soft);
+      border-radius: 50px;
+      background: var(--detail-surface);
+      color: var(--detail-accent);
+      box-shadow: 0 4px 14px #03312e12;
+      pointer-events: none
+}
+#world-details .story-copy > .eyebrow { color: var(--detail-accent) }
+#world-details .story-highlights {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-block: 24px
+}
+#world-details .story-highlights > span {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 14px;
+      border: 1px solid var(--detail-soft);
+      border-radius: 14px;
+      background: var(--detail-soft);
+      color: var(--green);
+      font-size: 12px;
+      line-height: 1.7
+}
+#world-details .story-highlights .detail-icon { width: 21px; height: 21px; color: var(--detail-accent) }
+#world-details .story-image > .story-secondary { border-color: var(--detail-surface); background: var(--detail-surface) }
+#world-details .world-details-nav .round,
+#world-details-close { background: var(--detail-surface); color: var(--detail-accent); border-color: transparent }
+@media (max-width: 600px) {
+      #world-details .world-details-header { gap: 12px }
+      #world-details-emblem { width: 40px; height: 40px; border-radius: 12px }
+      #world-details-title { font-size: 18px }
+      #world-details .world-details-mood { gap: 10px; padding: 9px 12px }
+      #world-details .world-details-mood .detail-icon { width: 20px; height: 20px }
+      #world-details .story-highlights { grid-template-columns: minmax(0, 1fr) }
+}
+
+/* Bare icons drift in the dark backdrop, outside the popup surface. */
+#world-details { overflow: visible; width: min(880px, calc(100% - 180px)) }
+#world-details .world-details-shell {
+      position: relative;
+      border-radius: inherit;
+      overflow: hidden;
+      z-index: 1
+}
+#world-details-orbits {
+      position: fixed;
+      inset: 0;
+      display: block;
+      pointer-events: none;
+      user-select: none;
+      z-index: 2
+}
+#world-details .detail-orbit {
+      position: absolute;
+      display: block;
+      width: 32px;
+      height: 32px;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      color: var(--detail-soft);
+      opacity: .8;
+      box-shadow: none;
+      animation: detail-orbit-arrive .55s cubic-bezier(.22, 1, .36, 1) both;
+      animation-delay: var(--appear-delay, .35s)
+}
+#world-details .detail-orbit .detail-icon {
+      display: block;
+      width: 32px;
+      height: 32px;
+      animation: detail-orbit-float var(--orbit-duration, 6s) ease-in-out infinite;
+      animation-delay: var(--orbit-delay, 0s)
+}
+@keyframes detail-orbit-arrive {
+      from { opacity: 0; transform: translateY(20px) }
+      to { opacity: .8; transform: translateY(0) }
+}
+@keyframes detail-orbit-float {
+      0%, 100% { transform: translate(0, 0) rotate(var(--orbit-angle, 0deg)) }
+      50% { transform: translate(3px, -9px) rotate(calc(var(--orbit-angle, 0deg) + 7deg)) }
+}
+@media (max-width: 600px) {
+      #world-details { width: calc(100% - 64px) }
+      #world-details .detail-orbit { width: 20px; height: 20px }
+      #world-details .detail-orbit .detail-icon {
+            width: 20px;
+            height: 20px
+      }
+}
+.motion-paused #world-details .detail-orbit,
+.motion-paused #world-details .detail-orbit .detail-icon { animation: none }
+@media (prefers-reduced-motion: reduce) {
+      #world-details .detail-orbit,
+      #world-details .detail-orbit .detail-icon { animation: none }
+}
+@media (max-width: 400px) {
+      #world-details .world-details-header { padding: 12px; gap: 8px }
+      #world-details-emblem { width: 30px; height: 30px }
+      #world-details-emblem .detail-icon { width: 21px; height: 21px }
+      #world-details-title { font-size: 15px }
+      #world-details-close { width: 36px; height: 36px }
+      #world-details .world-details-body { padding: 14px }
+}
+
+#world-details .detail-orbit[hidden] { display: none }
