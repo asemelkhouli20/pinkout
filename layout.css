@@ -1844,3 +1844,25 @@ html[dir="rtl"] #journey .journey-stops li > span { text-align: right }
       height: clamp(48px, 5vw, 72px);
       pointer-events: none
 }
+
+/* An illustrated repeat covers the entire program section. */
+#happening {
+      position: relative;
+      isolation: isolate;
+      background: var(--paper)
+}
+#happening::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: url("assets/illustrations/happening-repeat.webp") 0 0 / 640px 640px repeat;
+      opacity: .18;
+      pointer-events: none
+}
+#happening > .section-head {
+      background: radial-gradient(ellipse, #f8f4eef2 15%, #f8f4eea8 55%, transparent 75%)
+}
+@media (max-width: 650px) {
+      #happening::before { background-size: 460px 460px; opacity: .23 }
+}
