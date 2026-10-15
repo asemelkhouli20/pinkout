@@ -1484,6 +1484,26 @@ window.PINKOUT = {
       "ar": "أي عالم بعده؟",
       "en": "What is your next stop?"
     },
+    "moments.backdrop.1": {
+      "ar": "لحظات",
+      "en": "Moments"
+    },
+    "moments.backdrop.2": {
+      "ar": "ضحكة",
+      "en": "Laughter"
+    },
+    "moments.backdrop.3": {
+      "ar": "إيقاع",
+      "en": "Rhythm"
+    },
+    "moments.backdrop.4": {
+      "ar": "ذكريات",
+      "en": "Memories"
+    },
+    "moments.pause.title": {
+      "ar": "لحظة بين اللحظات",
+      "en": "A little pause between moments"
+    },
     "moments.friends.title": {
       "ar": "السوالف أحلى هنا",
       "en": "Better together"

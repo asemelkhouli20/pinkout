@@ -1673,3 +1673,154 @@ html[dir="rtl"] #journey .journey-stops li > span { text-align: right }
       #journey .journey-stops h3 { margin: 0; font-size: 18px }
       #journey .journey-stops p { grid-column: 2; font-size: 13px }
 }
+
+/* A stack of moments opens into a spread as the page scrolls. */
+#moments > h2 { margin-bottom: 18px; font-size: clamp(30px, 4vw, 54px); line-height: 1.6 }
+#moments > .lead { max-width: 66ch; margin-bottom: 32px }
+.moments-stage { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px }
+.moment-card {
+      min-width: 0;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: var(--ivory);
+      color: var(--green);
+      box-shadow: 0 12px 28px #03312e12
+}
+.moment-card:nth-child(even) { background: #fbe4df }
+.moment-card > img { display: block; width: 100%; height: 230px; object-fit: cover }
+.moment-card-copy { padding: 24px }
+.moment-card-number { display: block; font: 11px/1.5 Arial, sans-serif; color: var(--muted); margin-bottom: 14px }
+.moment-card h3 { margin: 0 0 12px; font-size: 23px; line-height: 1.7; font-weight: 600 }
+.moment-card p { margin: 0; font-size: 14px; line-height: 1.9; color: var(--muted) }
+#moments > .journal-pullquote { margin: 28px auto 0; padding-block: 24px }
+#moments > .journal-pullquote p { font-size: clamp(24px, 3vw, 36px) }
+.moments-scroll.is-scroll-deck { height: 125svh }
+.is-scroll-deck .moments-stage {
+      position: sticky;
+      top: 100px;
+      display: block;
+      height: calc(100svh - 120px);
+      min-height: 460px;
+      max-height: 680px;
+      overflow: clip
+}
+.is-scroll-deck .moment-card {
+      position: absolute;
+      top: 30px;
+      left: 50%;
+      width: clamp(200px, 22vw, 300px);
+      height: calc(100% - 70px);
+      max-height: 520px;
+      transform-origin: center center;
+      will-change: transform
+}
+.is-scroll-deck .moment-card > img { height: 48% }
+.is-scroll-deck .moment-card-copy { padding: 20px }
+.is-scroll-deck .moment-card h3 { font-size: clamp(19px, 1.7vw, 23px) }
+@media (max-width: 900px) {
+      .moments-scroll.is-scroll-deck { height: 165svh }
+      .is-scroll-deck .moments-stage { top: 90px; height: calc(100svh - 105px); max-height: 640px; min-height: 440px }
+      .is-scroll-deck .moment-card { width: min(88%, 420px); top: 12px; height: calc(100% - 56px) }
+      .is-scroll-deck .moment-card > img { height: 45% }
+}
+@media (max-width: 600px) {
+      .moments-stage { grid-template-columns: minmax(0, 1fr) }
+      .moment-card-copy { padding: 20px }
+      .moment-card h3 { font-size: 22px }
+      .moment-card > img { height: 210px }
+      .is-scroll-deck .moment-card { width: calc(100% - 28px) }
+      .is-scroll-deck .moment-card h3 { font-size: 21px }
+      .is-scroll-deck .moment-card p { font-size: 13px }
+}
+/* Short screens use the static cards, keeping every word reachable. */
+@media (max-height: 560px) {
+      .moments-scroll.is-scroll-deck { height: auto }
+      .is-scroll-deck .moments-stage { position: static; display: grid; height: auto; min-height: 0; overflow: visible }
+      .is-scroll-deck .moment-card { position: static; width: auto; height: auto; max-height: none; transform: none !important; opacity: 1 !important }
+      .is-scroll-deck .moment-card > img { height: 200px }
+}
+
+/* Full-photo moments, with the story written directly over the image. */
+#moments .moment-card {
+      position: relative;
+      isolation: isolate;
+      min-height: 400px;
+      background: var(--green);
+      color: var(--paper)
+}
+#moments .moment-card > img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -2
+}
+#moments .moment-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 30%, #f8f4ee22 48%, #f8f4eede 76%, #f3e5e4f5 100%);
+      z-index: -1;
+      pointer-events: none
+}
+#moments .moment-card-copy {
+      display: flex;
+      flex-direction: column;
+      justify-content: end;
+      min-height: 400px;
+      height: 100%;
+      padding: 26px 24px
+}
+#moments .moment-card-number { color: #71334f }
+#moments .moment-card h3 { color: var(--green) }
+#moments .moment-card p { color: #4c3541 }
+#moments .is-scroll-deck .moment-card { position: absolute; min-height: 0 }
+#moments .is-scroll-deck .moment-card-copy { min-height: 0 }
+@media (max-width: 600px) {
+      #moments .moment-card-copy { padding: 24px 20px }
+}
+@media (max-height: 560px) {
+      #moments .is-scroll-deck .moment-card { position: relative }
+      #moments .is-scroll-deck .moment-card,
+      #moments .is-scroll-deck .moment-card-copy { min-height: 400px }
+}
+
+/* Oversized changing words sit behind the photo stack. */
+.moments-stage { position: relative; isolation: isolate }
+.moments-backdrop {
+      grid-column: 1 / -1;
+      padding: 16px 0 28px;
+      color: #b77f91;
+      font-size: clamp(48px, 8vw, 100px);
+      font-weight: 600;
+      line-height: 1.3;
+      text-align: center;
+      text-wrap: balance;
+      pointer-events: none;
+      user-select: none
+}
+.is-scroll-deck .moments-backdrop {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      display: grid;
+      place-content: center;
+      padding: 0 12px;
+      color: #b77f9170;
+      font-size: clamp(80px, 12vw, 178px);
+      line-height: 1.35
+}
+@media (max-width: 900px) {
+      .is-scroll-deck .moments-backdrop {
+            font-size: clamp(64px, 15vw, 120px);
+            place-content: start center;
+            padding-top: 12px
+      }
+}
+#moments .is-scroll-deck .moments-backdrop { place-content: center; padding-top: 0 }
+#moments .is-scroll-deck .moment-card { top: 90px; height: calc(100% - 120px) }
+@media (max-width: 900px) {
+      #moments .is-scroll-deck .moment-card { top: 72px; height: calc(100% - 104px) }
+}
