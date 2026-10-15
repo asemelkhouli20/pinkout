@@ -23,6 +23,31 @@
     $('meta[name="description"]').content = tr('seo.description');
     $('meta[property="og:title"]').content = tr('seo.shareTitle');
     $('meta[property="og:description"]').content = tr('seo.shareDescription');
+    $('meta[property="og:locale"]').content = locale === 'ar' ? 'ar_SA' : 'en_US';
+    $('meta[property="og:locale:alternate"]').content = locale === 'ar' ? 'en_US' : 'ar_SA';
+    $('meta[name="twitter:title"]').content = tr('seo.shareTitle');
+    $('meta[name="twitter:description"]').content = tr('seo.shareDescription');
+    const imageAlt = tr('image.hero');
+    $('meta[property="og:image:alt"]').content = imageAlt;
+    $('meta[name="twitter:image:alt"]').content = imageAlt;
+    const structuredData = $('#search-structured-data');
+    const schema = JSON.parse(structuredData.textContent);
+    for (const entity of schema['@graph']) {
+      if (entity['@type'] === 'Organization') entity.description = tr('seo.description');
+      if (entity['@type'] === 'WebPage') {
+        entity.name = tr('seo.title');
+        entity.description = tr('seo.description');
+        entity.inLanguage = locale;
+      }
+      if (entity['@type'] === 'FAQPage') {
+        entity.inLanguage = locale;
+        entity.mainEntity.forEach((question, index) => {
+          question.name = tr(`faq.q${index + 1}`);
+          question.acceptedAnswer.text = tr(`faq.a${index + 1}`);
+        });
+      }
+    }
+    structuredData.textContent = JSON.stringify(schema);
     $('#language').textContent = locale === 'ar' ? 'EN' : 'عربي';
     $('#language').lang = locale === 'ar' ? 'en' : 'ar';
     $('#language').setAttribute('aria-label', locale === 'ar' ? 'Switch to English' : 'التبديل إلى العربية');

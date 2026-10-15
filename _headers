@@ -1,0 +1,9 @@
+# Supported by hosts such as Cloudflare Pages and Netlify.
+# Other servers need equivalent cache and compression configuration.
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Cache-Control: public, max-age=0, must-revalidate
+
+/assets/*
+  Cache-Control: public, max-age=604800

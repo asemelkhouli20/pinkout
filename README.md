@@ -38,6 +38,29 @@ Language switching, destination selection, saved moments, filters, day routes, l
 
 Upload `index.html`, `styles.css`, `layout.css`, `content.js`, `app.js`, `motion.js`, `tea-physics.js`, `tea.js` and `assets/` directly into the public web root. No framework, build step, Node.js runtime or backend is required.
 
+Also deploy `hero-bg-ob.css`, `program-effects.js`, `moments.js`, `robots.txt`, `sitemap.xml` and `_headers`. Keep all referenced assets, including the new `assets/logo-96.webp`.
+
+## Search and AI discovery improvements — October 15, 2026
+
+The Arabic HTML contains the main content and 13 readable FAQ answers without requiring JavaScript. JSON-LD describes the organization, website, page and those same visible questions. Language switching updates descriptions, sharing metadata, schema language and FAQ answers together. No unconfirmed address, opening date, event schedule or ticket offer is asserted in structured data. FAQ markup helps describe content; it does not guarantee a Google rich result or AI citation.
+
+`robots.txt` permits crawlers and points to the canonical homepage sitemap. The canonical domain remains the existing `https://pinkoutsa.com/`. There are no separate English URLs, so no unsupported language-alternate URLs were added. Open Graph and Twitter card metadata provide sharing titles, descriptions and imagery.
+
+The header now uses a 96px WebP logo (about 4 KB versus the original 1.1 MB). Images below the hero use native lazy loading, and sourced images decode asynchronously. Existing responsive WebP images, deferred scripts, font swapping and offscreen animation controls are retained. Original source artwork stays in the repository but is not requested by the page.
+
+`_headers` provides seven-day asset caching and revalidation for page/code files on compatible hosts such as Cloudflare Pages and Netlify. On other hosts, configure equivalent headers directly. Because asset names are not content hashes, replace changed assets with a new filename or purge the cache when updating them.
+
+Before production verification:
+
+1. Deploy these files to the existing domain. Configure Brotli or gzip for HTML, CSS, JS, JSON/XML and SVG at the host/CDN; this cannot be enabled by HTML alone.
+2. Verify HTTPS, a single preferred host, permanent redirects from alternate hosts and `/index.html` to `/`, genuine 404 responses, and HTTP 200 responses for the homepage, robots and sitemap.
+3. Submit `https://pinkoutsa.com/sitemap.xml` in Google Search Console and Bing Webmaster Tools. Inspect the live URL and check structured data using Google's tools.
+4. Measure mobile and desktop performance with PageSpeed Insights after deployment. Targets at the 75th percentile: LCP ≤2.5 seconds, INP ≤200 ms and CLS ≤0.1. Server response time, compression and real-user results remain unverified locally.
+
+Run `python3 scripts/check-search.py` to validate metadata, FAQ consistency, image attributes, anchors, resource references and sitemap syntax. JavaScript syntax and whitespace checks also passed for this update. Browser rendering and performance measurements were unavailable because no browser is connected in this session. These changes are local; production deployment has not been performed.
+
+References: [Google's AI search guidance](https://developers.google.com/search/docs/appearance/ai-features) and [JavaScript SEO basics](https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics).
+
 ## Verification
 
 83 DOM/source/physics simulation checks passed, including original interactions, autonomous liquid and pearl motion, rotation, mouse ripples, loop lifecycle, mobile autonomy, pixel budgets, soft collisions, pointer force, gallery-strip navigation, matte pearls and reference card structure. Five 60-second physics simulations at widths 320, 393, 768, 1440 and 2560 checked finite values, containment and speed on every step. Syntax, assets, anchors, translations and original asset bytes were checked. Browser visual rendering and actual desktop/mobile frame rates were not measured in this environment.
