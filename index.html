@@ -21,7 +21,7 @@
       <script defer src="motion.js?v=20261014-gallery-layout"></script>
       <script defer src="tea-physics.js?v=20261014-gallery-layout"></script>
       <script defer src="tea.js?v=20261014-green-tea"></script>
-      <link rel="stylesheet" href="layout.css?v=20261014-tea-card-right">
+      <link rel="stylesheet" href="layout.css?v=20261015-liquid-transition">
       <link rel="stylesheet" href="hero-bg-ob.css">
 
 </head>
@@ -252,18 +252,40 @@
                         </div>
                   </div>
             </section>
-            <section id="pillars" class="section pillars">
-                  <h2 class="reveal" data-i18n="pillars.title">أشياء صغيرة. لحظات كبيرة.</h2>
+            <section id="pillars" class="section pillars" aria-labelledby="pillars-title">
+                  <svg class="pillars-liquid-edge" viewBox="0 0 1440 160" preserveAspectRatio="none"
+                        aria-hidden="true" focusable="false">
+                        <path class="pillars-liquid-edge__milk"
+                              d="M0 42C180 42 220 140 430 102S700 10 920 66S1230 150 1440 56V160H0Z"/>
+                        <path class="pillars-liquid-edge__cream"
+                              d="M0 72C180 72 240 156 450 122S720 40 940 91S1240 164 1440 88V160H0Z"/>
+                  </svg>
+                  <h2 id="pillars-title" class="reveal" data-i18n="pillars.title">أشياء صغيرة. لحظات كبيرة.</h2>
                   <div class="pillar-grid">
-                        <article class="pillar reveal"><small>01</small>
+                        <article class="pillar reveal">
+                              <span class="pillar-scene" aria-hidden="true">
+                                    <img src="assets/photographic/make-small.webp" width="650" height="365"
+                                          alt="" loading="lazy" decoding="async">
+                              </span>
+                              <small>01</small>
                               <h3 data-i18n="pillar.create.title">شيء صنعتيه بنفسك</h3>
                               <p data-i18n="pillar.create.body">قطعة بلمستك، فكرة جرّبتيها، وذكرى ترجع معك للبيت.</p>
                         </article>
-                        <article class="pillar reveal"><small>02</small>
+                        <article class="pillar reveal">
+                              <span class="pillar-scene" aria-hidden="true">
+                                    <img src="assets/photographic/hub-small.webp" width="650" height="365"
+                                          alt="" loading="lazy" decoding="async">
+                              </span>
+                              <small>02</small>
                               <h3 data-i18n="pillar.connect.title">وقت مع اللي تحبين</h3>
                               <p data-i18n="pillar.connect.body">طاولة قهوة، سوالف تطول، ولفّة حلوة مع الصديقات.</p>
                         </article>
-                        <article class="pillar reveal"><small>03</small>
+                        <article class="pillar reveal">
+                              <span class="pillar-scene" aria-hidden="true">
+                                    <img src="assets/photographic/live-small.webp" width="650" height="365"
+                                          alt="" loading="lazy" decoding="async">
+                              </span>
+                              <small>03</small>
                               <h3 data-i18n="pillar.discover.title">كل زيارة، اكتشاف</h3>
                               <p data-i18n="pillar.discover.body">موسيقى، ورشة، أو بوب أب جديد. خلي مساحة للمفاجأة.</p>
                         </article>
