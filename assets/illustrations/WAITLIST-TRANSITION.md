@@ -1,0 +1,6 @@
+Created using the built-in image_gen tool. Final asset: waitlist-transition.webp. Full generated source: waitlist-transition-source.png. Used at both waitlist edges; the bottom instance is rotated. The main blush background remains unchanged.
+
+Final generation prompt:
+
+Use case: stylized-concept. Asset type: decorative website section transition background, wide horizontal 3:2 landscape image, minimalist flat graphic. Top portion is uniform warm cream #f8f4ee, bottom portion is uniform blush pink #febebc. Between them create one beautifully smooth gently undulating scalloped edge with just FOUR very broad rounded pink rises across the entire width, evenly spaced, almost like a calm liquid surface. The pink rounded shapes are connected to the solid pink region below: NOT floating circles, NOT polka dots, NOT separate bubbles, no multiple rows. Extremely restrained, organized, airy and clean. The edge sits around the vertical midpoint, the top 25 percent stays completely flat cream, the bottom 25 percent stays completely flat blush, so this artwork can meet solid website section colors without seams. Smooth subtle softening along the boundary, no hard outlines, no shadows, no texture, no noise, no decorative objects, no icons, no text, no logos, no border. Straight-on flat artwork, not a mockup. Only the two colors cream and blush.
+

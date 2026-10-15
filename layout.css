@@ -2301,3 +2301,26 @@ html[dir="rtl"] #journey .journey-stops li > span { text-align: right }
       #entry .ticket-bottom { padding: 22px 24px }
       .ticket-seal { inset-inline-end: 24px; top: 66px }
 }
+
+/* Generated artwork connects the paper surfaces to the existing pink waitlist. */
+#waitlist {
+      position: relative;
+      isolation: isolate;
+      border-radius: 0;
+      background: var(--blush);
+      padding-block: clamp(100px, 9vw, 136px)
+}
+#waitlist::before,
+#waitlist::after {
+      content: "";
+      position: absolute;
+      inset-inline: 0;
+      height: clamp(86px, 8vw, 116px);
+      z-index: -1;
+      background:
+            linear-gradient(to bottom, var(--paper) 0%, transparent 24%, transparent 70%, var(--blush) 100%),
+            url("assets/illustrations/waitlist-transition.webp") center / 100% 100% no-repeat;
+      pointer-events: none
+}
+#waitlist::before { top: -1px }
+#waitlist::after { bottom: -1px; transform: rotate(180deg) }
