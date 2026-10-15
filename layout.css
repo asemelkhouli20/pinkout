@@ -173,7 +173,7 @@ main,
       padding-top: calc(var(--liquid-edge-height) + clamp(28px, 4vw, 56px));
       background: var(--paper);
       color: var(--green);
-      border-bottom: 1px solid var(--line)
+      border-bottom: 0
 }
 
 .pillars-liquid-edge {
