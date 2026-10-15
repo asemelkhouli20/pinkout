@@ -500,7 +500,7 @@
         $$('.nav-link').forEach(a => { const current=a.hash===`#${entry.target.id}`; a.classList.toggle('current',current); if(current) a.setAttribute('aria-current','location'); else a.removeAttribute('aria-current'); });
       }});
     },{rootMargin:'-20% 0px -55% 0px'});
-    ['worlds','happening','gallery','entry','partners','faq'].forEach(id => navObserver.observe(document.getElementById(id)));
+    ['worlds','happening','gallery','entry','faq'].forEach(id => navObserver.observe(document.getElementById(id)));
   }
   applyTranslations(); syncMotion(); openWorldDetailsFromHash();
 })();

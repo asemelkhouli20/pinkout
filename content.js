@@ -1608,9 +1608,13 @@ window.PINKOUT = {
       "ar": "قصة يعيشونها بدل ما يشوفونها فقط.",
       "en": "A story people experience for themselves."
     },
+    "faq.admission": {
+      "ar": "الدخول والتذاكر",
+      "en": "Admission & tickets"
+    },
     "faq.visit": {
-      "ar": "الزيارة والدخول",
-      "en": "Visiting & entry"
+      "ar": "الزيارة والموقع",
+      "en": "Visiting & location"
     },
     "faq.experience": {
       "ar": "التجارب والتطبيق",
