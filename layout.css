@@ -224,8 +224,30 @@ main,
 }
 
 .worlds:before {
+      content: "";
+      position: absolute;
       top: 0;
-      height: 120px
+      inset-inline: 0;
+      height: clamp(80px, 9vw, 130px);
+      background: url("assets/worlds-ripple.svg") center top / 100% 100% no-repeat;
+      pointer-events: none;
+      transform-origin: center top;
+      animation: worlds-ripple 9s ease-in-out infinite alternate
+}
+
+@keyframes worlds-ripple {
+      from { transform: translateY(-5px) scaleX(1) }
+      to { transform: translateY(4px) scaleX(1.04) }
+}
+
+.motion-paused .worlds:before {
+      animation: none
+}
+
+@media (prefers-reduced-motion: reduce) {
+      .worlds:before {
+            animation: none
+      }
 }
 
 .entry>.journal-kicker {
