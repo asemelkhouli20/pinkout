@@ -1693,14 +1693,17 @@ html[dir="rtl"] #journey .journey-stops li > span { text-align: right }
 .moment-card-number { display: block; font: 11px/1.5 Arial, sans-serif; color: var(--muted); margin-bottom: 14px }
 .moment-card h3 { margin: 0 0 12px; font-size: 23px; line-height: 1.7; font-weight: 600 }
 .moment-card p { margin: 0; font-size: 14px; line-height: 1.9; color: var(--muted) }
-#moments > .journal-pullquote { margin: 28px auto 0; padding-block: 24px }
+#moments > .journal-pullquote { margin: 0 auto; padding: 0 0 24px }
 #moments > .journal-pullquote p { font-size: clamp(24px, 3vw, 36px) }
-.moments-scroll.is-scroll-deck { height: 125svh }
+.moments-scroll.is-scroll-deck {
+      --moment-stage-height: clamp(460px, calc(100svh - 120px), 680px);
+      height: calc(var(--moment-stage-height) + 240px)
+}
 .is-scroll-deck .moments-stage {
       position: sticky;
       top: 100px;
       display: block;
-      height: calc(100svh - 120px);
+      height: var(--moment-stage-height);
       min-height: 460px;
       max-height: 680px;
       overflow: clip
@@ -1719,8 +1722,11 @@ html[dir="rtl"] #journey .journey-stops li > span { text-align: right }
 .is-scroll-deck .moment-card-copy { padding: 20px }
 .is-scroll-deck .moment-card h3 { font-size: clamp(19px, 1.7vw, 23px) }
 @media (max-width: 900px) {
-      .moments-scroll.is-scroll-deck { height: 165svh }
-      .is-scroll-deck .moments-stage { top: 90px; height: calc(100svh - 105px); max-height: 640px; min-height: 440px }
+      .moments-scroll.is-scroll-deck {
+            --moment-stage-height: clamp(440px, calc(100svh - 105px), 640px);
+            height: calc(var(--moment-stage-height) + 360px)
+      }
+      .is-scroll-deck .moments-stage { top: 90px; height: var(--moment-stage-height); max-height: 640px; min-height: 440px }
       .is-scroll-deck .moment-card { width: min(88%, 420px); top: 12px; height: calc(100% - 56px) }
       .is-scroll-deck .moment-card > img { height: 45% }
 }
@@ -1823,4 +1829,17 @@ html[dir="rtl"] #journey .journey-stops li > span { text-align: right }
 #moments .is-scroll-deck .moment-card { top: 90px; height: calc(100% - 120px) }
 @media (max-width: 900px) {
       #moments .is-scroll-deck .moment-card { top: 72px; height: calc(100% - 104px) }
+}
+
+/* A continuous green edge flows from Journey into Moments. */
+#moments {
+      padding-top: clamp(56px, 6vw, 80px)
+}
+.moments-entry-wave {
+      position: absolute;
+      display: block;
+      inset: -1px -1px auto;
+      width: calc(100% + 2px);
+      height: clamp(48px, 5vw, 72px);
+      pointer-events: none
 }
