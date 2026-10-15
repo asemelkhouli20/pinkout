@@ -232,6 +232,10 @@ window.PINKOUT = {
       "ar": "خطوة واحدة. عوالم كثيرة.",
       "en": "One way in. So much to explore."
     },
+    "entry.ticketLabel": {
+      "ar": "دخول عام",
+      "en": "GENERAL ADMISSION"
+    },
     "entry.priceLabel": {
       "ar": "سعر الدخول العام المخطّط",
       "en": "Planned general admission"
