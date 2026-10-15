@@ -14,7 +14,7 @@
       <meta property="og:image" content="https://pinkoutsa.com/assets/photographic/hero.webp">
       <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
       <link rel="preload" href="assets/alexandria-regular.ttf" as="font" type="font/ttf" crossorigin="">
-      <script defer src="content.js?v=20261015-faq-refresh"></script>
+      <script defer src="content.js?v=20261015-footer-layout"></script>
       <script defer src="app.js?v=20261015-faq-refresh"></script>
       <link rel="stylesheet" href="styles.css?v=20261014-green-tea">
       <link rel="canonical" href="https://pinkoutsa.com/">
@@ -23,7 +23,7 @@
       <script defer src="motion.js?v=20261014-gallery-layout"></script>
       <script defer src="tea-physics.js?v=20261014-gallery-layout"></script>
       <script defer src="tea.js?v=20261014-green-tea"></script>
-      <link rel="stylesheet" href="layout.css?v=20261015-centered-faq-eyebrow">
+      <link rel="stylesheet" href="layout.css?v=20261015-footer-layout">
       <link rel="stylesheet" href="hero-bg-ob.css">
 
 </head>
@@ -1313,44 +1313,59 @@
             </section>
       </main>
       <footer id="footer" class="footer dark">
-            <div class="footer-top">
-                  <img src="assets/logo.svg" width="200" height="130" alt="PinkOut">
-                  <div>
+            <div class="footer-main">
+                  <div class="footer-top">
+                        <a class="footer-logo" href="#home" aria-label="PinkOut">
+                              <img src="assets/logo.svg" width="200" height="130" alt="PinkOut">
+                        </a>
                         <h2 data-i18n="ui.footer">عالمك الخاص. قريبًا في الرياض.</h2>
                         <p data-i18n="footer.story">سبعة عوالم للجمال والإبداع والحركة واللحظات اللي تجمعنا.</p>
                   </div>
-                  <a class="round" href="#home" aria-label="العودة إلى الأعلى" data-label="general.backToTop"><svg
-                              xmlns="http://www.w3.org/2000/svg" class="icon icon--arrow-up" viewBox="0 0 24 24"
-                              fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"
-                              stroke-linejoin="round" aria-hidden="true" focusable="false">
-                              <path d="M12 20V4M5 11l7-7 7 7"></path>
-                        </svg></a>
-            </div>
-            <div class="footer-links">
-                  <a class="text-link" href="#worlds"><span data-i18n="nav.world">عالم PinkOut</span><span
-                              aria-hidden="true" class="arrow"><svg xmlns="http://www.w3.org/2000/svg"
-                                    class="icon icon--arrow-up-right" viewBox="0 0 24 24" fill="none"
-                                    stroke="currentColor" stroke-width="1.7" stroke-linecap="round"
-                                    stroke-linejoin="round" aria-hidden="true" focusable="false">
-                                    <path d="M6 18 18 6M6 6h12v12"></path>
-                              </svg></span></a><a class="text-link" href="#gallery"><span
-                              data-i18n="nav.gallery">الصور</span><span aria-hidden="true" class="arrow"><svg
-                                    xmlns="http://www.w3.org/2000/svg" class="icon icon--arrow-up-right"
-                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
-                                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-                                    <path d="M6 18 18 6M6 6h12v12"></path>
-                              </svg></span></a><a class="text-link" href="#faq"><span data-i18n="nav.faq">الأسئلة
-                              الشائعة</span><span aria-hidden="true" class="arrow"><svg
-                                    xmlns="http://www.w3.org/2000/svg" class="icon icon--arrow-up-right"
-                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
-                                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-                                    <path d="M6 18 18 6M6 6h12v12"></path>
-                              </svg></span></a>
+                  <nav class="footer-navigation" aria-labelledby="footer-nav-title">
+                        <h3 id="footer-nav-title" data-i18n="footer.navigation">تصفّحي العالم</h3>
+                        <div class="footer-links">
+                        <a class="text-link" href="#worlds">
+                              <span class="footer-link-index" lang="en" aria-hidden="true">01</span>
+                              <span data-i18n="nav.world">عالم PinkOut</span>
+                              <svg class="icon footer-link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg>
+                        </a>
+                        <a class="text-link" href="#happening">
+                              <span class="footer-link-index" lang="en" aria-hidden="true">02</span>
+                              <span data-i18n="nav.whatsOn">وش الجديد؟</span>
+                              <svg class="icon footer-link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg>
+                        </a>
+                        <a class="text-link" href="#gallery">
+                              <span class="footer-link-index" lang="en" aria-hidden="true">03</span>
+                              <span data-i18n="nav.gallery">الصور</span>
+                              <svg class="icon footer-link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg>
+                        </a>
+                        <a class="text-link" href="#day">
+                              <span class="footer-link-index" lang="en" aria-hidden="true">04</span>
+                              <span data-i18n="nav.day">يومك</span>
+                              <svg class="icon footer-link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg>
+                        </a>
+                        <a class="text-link" href="#entry">
+                              <span class="footer-link-index" lang="en" aria-hidden="true">05</span>
+                              <span data-i18n="nav.visit">زيارتك</span>
+                              <svg class="icon footer-link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg>
+                        </a>
+                        <a class="text-link" href="#faq">
+                              <span class="footer-link-index" lang="en" aria-hidden="true">06</span>
+                              <span data-i18n="nav.faq">الأسئلة الشائعة</span>
+                              <svg class="icon footer-link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg>
+                        </a>
+                        </div>
+                  </nav>
             </div>
             <div class="footer-bottom">
-                  <p data-i18n="ui.copyright">© ٢٠٢٦ PinkOut. جميع الحقوق محفوظة.</p>
-                  <p class="caption" data-i18n="general.conceptDisclaimer">الصور والتصاميم توضيحية وقد تختلف التفاصيل
-                        النهائية.</p>
+                  <div class="footer-fine-print">
+                        <p data-i18n="ui.copyright">© ٢٠٢٦ PinkOut. جميع الحقوق محفوظة.</p>
+                        <p class="caption" data-i18n="general.conceptDisclaimer">الصور والتصاميم توضيحية وقد تختلف التفاصيل النهائية.</p>
+                  </div>
+                  <a class="footer-back-top" href="#home">
+                        <span data-i18n="general.backToTop">العودة إلى الأعلى</span>
+                        <span class="round" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 20V4M5 11l7-7 7 7"/></svg></span>
+                  </a>
             </div>
       </footer>
       <dialog id="world-details" aria-labelledby="world-details-title">

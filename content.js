@@ -400,6 +400,10 @@ window.PINKOUT = {
       "ar": "PinkOut — عالمك الخاص. قريبًا في الرياض.",
       "en": "PinkOut — Your Own World. Coming soon to Riyadh."
     },
+    "footer.navigation": {
+      "ar": "تصفّحي العالم",
+      "en": "Explore PinkOut"
+    },
     "footer.story": {
       "ar": "سبعة عوالم للجمال والإبداع والحركة واللحظات اللي تجمعنا.",
       "en": "Seven worlds of beauty, creativity, movement and moments together."
