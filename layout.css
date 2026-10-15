@@ -2171,3 +2171,19 @@ html[dir="rtl"] #journey .journey-stops li > span { text-align: right }
       #day .route-stop img { height: 170px }
       #day .day-pass-top { align-items: start; flex-wrap: wrap }
 }
+
+/* The app's blush surface flows between the neighboring paper sections. */
+#app { position: relative; border-radius: 0 }
+.app-edge-wave {
+      position: absolute;
+      display: block;
+      inset-inline: -1px;
+      width: calc(100% + 2px);
+      height: clamp(44px, 5vw, 72px);
+      pointer-events: none
+}
+.app-edge-wave--top { top: -1px }
+.app-edge-wave--bottom { bottom: -1px; transform: rotate(180deg) }
+
+#app .app-phones { gap: 0 }
+#app .phone + .phone { margin-inline-start: -24px }
