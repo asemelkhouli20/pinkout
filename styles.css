@@ -1600,11 +1600,13 @@ summary::-webkit-details-marker {
             background: var(--ivory)
       }
 
-      main,
-      .header {
+      main {
             max-width: var(--max);
             margin: auto;
             background: var(--paper)
+      }
+      .header {
+            /* margin-top: 16px !important; */
       }
 }
 
@@ -6384,8 +6386,7 @@ main,
 @media(min-width:1600px) {
 
       body,
-      main,
-      .header {
+      main{
             max-width: none;
             width: 100%;
             margin: 0
