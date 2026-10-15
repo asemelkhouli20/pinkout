@@ -45,3 +45,11 @@ Upload `index.html`, `styles.css`, `layout.css`, `content.js`, `app.js`, `motion
 ## ZIP deployment
 
 The ZIP contains the complete static website at its root: `index.html`, both stylesheets, all JavaScript, bundled fonts, photographs, SVG frames and tea artwork. Extract it and copy its contents to your web server’s document root. Keep both CSS files and all script files; `layout.css` supplies the final layout corrections. No package installation or build command is needed. Existing booking and signup channels remain in their documented prelaunch state.
+
+## Sticker image optimization
+
+The hero uses transparent WebP stickers at 140, 280 and 420 pixels, selected through `srcset` and CSS-matched `sizes`. Decorative stickers have low fetch priority and asynchronous decoding. The original PNGs are retained as source artwork; the page no longer downloads them.
+
+All 12 originals total 18,819,589 bytes. The 12 optimized images total 61,754 bytes at 140px, 169,298 bytes at 280px, or 304,770 bytes at 420px (98.4–99.7% smaller). Browsers select one size per image according to display size and pixel density. These are asset-size measurements, not measured page-load times.
+
+To regenerate after changing the original PNG artwork, install the WebP `cwebp` command and run `python3 scripts/optimize-stickers.py`. Deploy the generated WebP files with `index.html`. All 36 generated images were verified to decode and all sticker image references were checked.
