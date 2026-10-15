@@ -1833,7 +1833,8 @@ html[dir="rtl"] #journey .journey-stops li > span { text-align: right }
 
 /* A continuous green edge flows from Journey into Moments. */
 #moments {
-      padding-top: clamp(56px, 6vw, 80px)
+      padding-top: clamp(56px, 6vw, 80px);
+      padding-bottom: 0px;
 }
 .moments-entry-wave {
       position: absolute;
