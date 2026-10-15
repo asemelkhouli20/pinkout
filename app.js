@@ -4,7 +4,7 @@
   const imageDirectory = window.PINKOUT.imageDirectory || 'assets/';
   const $ = s => document.querySelector(s);
   const $$ = s => [...document.querySelectorAll(s)];
-  let locale = 'ar', selectedWorld = 'passage', selectedMood = 'create', selectedFilter = 'all';
+  let locale = 'ar', selectedWorld = 'passage', selectedMood = 'create';
   let lightboxIndex = 0, returnFocus = null, motionPaused = false;
   const saved = new Set();
   const iconPaths = {"arrow-up-right": "M6 18 18 6M6 6h12v12", "arrow-right": "M4 12h16M13 5l7 7-7 7", "arrow-left": "M20 12H4m7-7-7 7 7 7", "arrow-up": "M12 20V4M5 11l7-7 7 7", "arrow-down": "M12 4v16m-7-7 7 7 7-7", "close": "M6 6l12 12M18 6 6 18", "plus": "M12 5v14M5 12h14", "pause": "M9 5v14M15 5v14", "play": "m8 5 11 7-11 7Z", "menu": "M4 7h16M4 17h16", "heart": "M20.8 4.6a5.4 5.4 0 0 0-7.6 0L12 5.8l-1.2-1.2a5.4 5.4 0 0 0-7.6 7.6L12 21l8.8-8.8a5.4 5.4 0 0 0 0-7.6Z"};
@@ -337,16 +337,6 @@
     window.PinkOutMotion?.pulse($('#saved-count'));
     window.PinkOutMotion?.refresh($('#collection-cards'));
   });
-  $$('.filters button').forEach(el => el.addEventListener('click', () => {
-    selectedFilter = el.dataset.filter;
-    $('.program-grid').classList.toggle('filtered', selectedFilter !== 'all');
-    $$('.filters button').forEach(btn => { const active = btn === el; btn.classList.toggle('active', active); btn.setAttribute('aria-pressed', String(active)); });
-    $$('.program-card').forEach(card => { card.hidden = selectedFilter !== 'all' && card.dataset.category !== selectedFilter; });
-    const count = $$('.program-card:not([hidden])').length;
-    $('#filter-count').textContent = String(count);
-    announce(`${count} ${tr('general.exampleLabel')}`);
-    window.PinkOutMotion?.refresh($('.program-grid'));
-  }));
   function renderHighlights() {
     $$('[data-highlights]').forEach(el => {
       el.replaceChildren(...tr(el.dataset.highlights).split(' · ').map((label,index) => {

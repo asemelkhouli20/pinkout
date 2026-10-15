@@ -15,14 +15,15 @@
       <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
       <link rel="preload" href="assets/alexandria-regular.ttf" as="font" type="font/ttf" crossorigin="">
       <script defer src="content.js?v=20261015-one-word-moments"></script>
-      <script defer src="app.js?v=20261015-near-spaced-icons"></script>
+      <script defer src="app.js?v=20261015-no-program-filters"></script>
       <link rel="stylesheet" href="styles.css?v=20261014-green-tea">
       <link rel="canonical" href="https://pinkoutsa.com/">
+      <script defer src="program-effects.js?v=20261015-full-burst"></script>
       <script defer src="moments.js?v=20261015-restored-sticky-moments"></script>
       <script defer src="motion.js?v=20261014-gallery-layout"></script>
       <script defer src="tea-physics.js?v=20261014-gallery-layout"></script>
       <script defer src="tea.js?v=20261014-green-tea"></script>
-      <link rel="stylesheet" href="layout.css?v=20261015-happening-repeat">
+      <link rel="stylesheet" href="layout.css?v=20261015-centered-program-eyebrow">
       <link rel="stylesheet" href="hero-bg-ob.css">
 
 </head>
@@ -570,29 +571,16 @@
                         <p class="lead" data-i18n="happening.description">من ليلة سينما هادئة إلى أجواء K-POP أو قهوة
                               وحناء. تصفّحي أفكار البرامج اللي نتخيّلها لـ PinkOut؛ المواعيد والتفاصيل تُعلن لاحقًا.</p>
                   </div>
-                  <div class="filters" role="group" aria-label="وش الجديد؟" data-label="nav.whatsOn">
-                        <button type="button" class="chip active" aria-pressed="true" data-filter="all"><span
-                                    data-i18n="happening.filter.all">كل الأفكار</span></button><button type="button"
-                              class="chip" aria-pressed="false" data-filter="culture"><span
-                                    data-i18n="happening.filter.culture">موسيقى وثقافة</span></button><button
-                              type="button" class="chip" aria-pressed="false" data-filter="cozy"><span
-                                    data-i18n="happening.filter.cozy">جلسات وأجواء</span></button><button type="button"
-                              class="chip" aria-pressed="false" data-filter="creative"><span
-                                    data-i18n="happening.filter.creative">إبداع وتحوّل</span></button><button
-                              type="button" class="chip" aria-pressed="false" data-filter="adventure"><span
-                                    data-i18n="happening.filter.adventure">مغامرات خفيفة</span></button>
-                  </div>
-                  <p class="caption filter-status" aria-live="polite" aria-atomic="true"><b id="filter-count">8</b>
-                        <span data-i18n="ui.eventCount">أفكار مقترحة</span>
-                  </p>
                   <div class="program-grid">
-                        <article class="program-card reveal" data-category="culture">
+                        <article class="program-card reveal" data-program="kpop" tabindex="0" data-category="culture">
                               <div class="program-image">
-                                    <img style="object-position:50% 50%"
-                                          sizes="(max-width: 650px) 90vw, (max-width: 1000px) 45vw, 40vw"
-                                          srcset="assets/photographic/program-0-small.webp 650w, assets/photographic/program-0.webp 1532w"
-                                          src="assets/photographic/program-0.webp" loading="lazy" width="1532"
-                                          height="1026" alt="ليلة K-POP" data-alt="happening.kpop.title">
+                                    <img src="assets/programs/kpop-activity-480.webp"
+                                          srcset="assets/programs/kpop-activity-480.webp 480w, assets/programs/kpop-activity-960.webp 960w"
+                                          sizes="(max-width: 650px) 90vw, (max-width: 1100px) 45vw, 23vw"
+                                          loading="lazy" decoding="async" width="960" height="640"
+                                          alt="ليلة K-POP" data-alt="happening.kpop.title">
+                              <span class="program-category" data-i18n="happening.filter.culture">موسيقى وثقافة</span>
+                                    <span class="program-emblem" aria-hidden="true">🎤</span>
                               </div>
                               <div class="program-copy">
                                     <span class="program-number" aria-hidden="true">01</span>
@@ -602,11 +590,15 @@
                                           الكيبوب.</p>
                               </div>
                         </article>
-                        <article class="program-card reveal" data-category="cozy">
+                        <article class="program-card reveal" data-program="movie" tabindex="0" data-category="cozy">
                               <div class="program-image">
-                                    <img style="object-position:50% 50%" sizes="(max-width: 700px) 90vw, 45vw"
-                                          src="assets/photographic/program-1.webp" loading="lazy" width="584"
-                                          height="329" alt="ليلة السينما" data-alt="happening.movie.title">
+                                    <img src="assets/programs/movie-activity-480.webp"
+                                          srcset="assets/programs/movie-activity-480.webp 480w, assets/programs/movie-activity-960.webp 960w"
+                                          sizes="(max-width: 650px) 90vw, (max-width: 1100px) 45vw, 23vw"
+                                          loading="lazy" decoding="async" width="960" height="640"
+                                          alt="ليلة السينما" data-alt="happening.movie.title">
+                              <span class="program-category" data-i18n="happening.filter.cozy">جلسات وأجواء</span>
+                                    <span class="program-emblem" aria-hidden="true">🎬</span>
                               </div>
                               <div class="program-copy">
                                     <span class="program-number" aria-hidden="true">02</span>
@@ -615,13 +607,15 @@
                                     <p data-i18n="happening.movie.body">جلسات مريحة، فشار، وسهرة بطابع سينمائي.</p>
                               </div>
                         </article>
-                        <article class="program-card reveal" data-category="culture">
+                        <article class="program-card reveal" data-program="henna" tabindex="0" data-category="culture">
                               <div class="program-image">
-                                    <img style="object-position:50% 30%"
-                                          sizes="(max-width: 650px) 90vw, (max-width: 1000px) 45vw, 40vw"
-                                          srcset="assets/photographic/program-2-small.webp 367w, assets/photographic/program-2.webp 395w"
-                                          src="assets/photographic/program-2.webp" loading="lazy" width="395"
-                                          height="700" alt="القهوة والحناء" data-alt="happening.henna.title">
+                                    <img src="assets/programs/henna-activity-480.webp"
+                                          srcset="assets/programs/henna-activity-480.webp 480w, assets/programs/henna-activity-960.webp 960w"
+                                          sizes="(max-width: 650px) 90vw, (max-width: 1100px) 45vw, 23vw"
+                                          loading="lazy" decoding="async" width="960" height="640"
+                                          alt="القهوة والحناء" data-alt="happening.henna.title">
+                              <span class="program-category" data-i18n="happening.filter.culture">موسيقى وثقافة</span>
+                                    <span class="program-emblem" aria-hidden="true">🌿</span>
                               </div>
                               <div class="program-copy">
                                     <span class="program-number" aria-hidden="true">03</span>
@@ -631,11 +625,15 @@
                                     </p>
                               </div>
                         </article>
-                        <article class="program-card reveal" data-category="creative">
+                        <article class="program-card reveal" data-program="princess" tabindex="0" data-category="creative">
                               <div class="program-image">
-                                    <img style="object-position:50% 30%" sizes="(max-width: 700px) 90vw, 45vw"
-                                          src="assets/photographic/program-3.webp" loading="lazy" width="588"
-                                          height="392" alt="يوم الأميرات" data-alt="happening.princess.title">
+                                    <img src="assets/programs/princess-activity-480.webp"
+                                          srcset="assets/programs/princess-activity-480.webp 480w, assets/programs/princess-activity-960.webp 960w"
+                                          sizes="(max-width: 650px) 90vw, (max-width: 1100px) 45vw, 23vw"
+                                          loading="lazy" decoding="async" width="960" height="640"
+                                          alt="يوم الأميرات" data-alt="happening.princess.title">
+                              <span class="program-category" data-i18n="happening.filter.creative">إبداع وتحوّل</span>
+                                    <span class="program-emblem" aria-hidden="true">👑</span>
                               </div>
                               <div class="program-copy">
                                     <span class="program-number" aria-hidden="true">04</span>
@@ -645,13 +643,15 @@
                                           من الأميرات.</p>
                               </div>
                         </article>
-                        <article class="program-card reveal" data-category="adventure">
+                        <article class="program-card reveal" data-program="horror" tabindex="0" data-category="adventure">
                               <div class="program-image">
-                                    <img style="object-position:50% 20%"
-                                          sizes="(max-width: 650px) 90vw, (max-width: 1000px) 45vw, 40vw"
-                                          srcset="assets/photographic/program-4-small.webp 471w, assets/photographic/program-4.webp 507w"
-                                          src="assets/photographic/program-4.webp" loading="lazy" width="507"
-                                          height="700" alt="يوم الرعب الخفيف" data-alt="happening.horror.title">
+                                    <img src="assets/programs/horror-activity-480.webp"
+                                          srcset="assets/programs/horror-activity-480.webp 480w, assets/programs/horror-activity-960.webp 960w"
+                                          sizes="(max-width: 650px) 90vw, (max-width: 1100px) 45vw, 23vw"
+                                          loading="lazy" decoding="async" width="960" height="640"
+                                          alt="يوم الرعب الخفيف" data-alt="happening.horror.title">
+                              <span class="program-category" data-i18n="happening.filter.adventure">مغامرات خفيفة</span>
+                                    <span class="program-emblem" aria-hidden="true">👻</span>
                               </div>
                               <div class="program-copy">
                                     <span class="program-number" aria-hidden="true">05</span>
@@ -660,13 +660,15 @@
                                     <p data-i18n="happening.horror.body">مؤثرات، مكياج، وتحديات مرحة بطابع غامض.</p>
                               </div>
                         </article>
-                        <article class="program-card reveal" data-category="cozy">
+                        <article class="program-card reveal" data-program="pajama" tabindex="0" data-category="cozy">
                               <div class="program-image">
-                                    <img style="object-position:50% 45%"
-                                          sizes="(max-width: 650px) 90vw, (max-width: 1000px) 45vw, 40vw"
-                                          srcset="assets/photographic/program-5-small.webp 366w, assets/photographic/program-5.webp 394w"
-                                          src="assets/photographic/program-5.webp" loading="lazy" width="394"
-                                          height="700" alt="يوم البيجاما" data-alt="happening.pajama.title">
+                                    <img src="assets/programs/pajama-activity-480.webp"
+                                          srcset="assets/programs/pajama-activity-480.webp 480w, assets/programs/pajama-activity-960.webp 960w"
+                                          sizes="(max-width: 650px) 90vw, (max-width: 1100px) 45vw, 23vw"
+                                          loading="lazy" decoding="async" width="960" height="640"
+                                          alt="يوم البيجاما" data-alt="happening.pajama.title">
+                              <span class="program-category" data-i18n="happening.filter.cozy">جلسات وأجواء</span>
+                                    <span class="program-emblem" aria-hidden="true">🌙</span>
                               </div>
                               <div class="program-copy">
                                     <span class="program-number" aria-hidden="true">06</span>
@@ -676,13 +678,15 @@
                                     </p>
                               </div>
                         </article>
-                        <article class="program-card reveal" data-category="culture">
+                        <article class="program-card reveal" data-program="japan" tabindex="0" data-category="culture">
                               <div class="program-image">
-                                    <img style="object-position:50% 35%"
-                                          sizes="(max-width: 650px) 90vw, (max-width: 1000px) 45vw, 40vw"
-                                          srcset="assets/photographic/program-6-small.webp 488w, assets/photographic/program-6.webp 516w"
-                                          src="assets/photographic/program-6.webp" loading="lazy" width="516"
-                                          height="687" alt="يوم البنات الياباني" data-alt="happening.japan.title">
+                                    <img src="assets/programs/japan-activity-480.webp"
+                                          srcset="assets/programs/japan-activity-480.webp 480w, assets/programs/japan-activity-960.webp 960w"
+                                          sizes="(max-width: 650px) 90vw, (max-width: 1100px) 45vw, 23vw"
+                                          loading="lazy" decoding="async" width="960" height="640"
+                                          alt="يوم البنات الياباني" data-alt="happening.japan.title">
+                              <span class="program-category" data-i18n="happening.filter.culture">موسيقى وثقافة</span>
+                                    <span class="program-emblem" aria-hidden="true">🌸</span>
                               </div>
                               <div class="program-copy">
                                     <span class="program-number" aria-hidden="true">07</span>
@@ -691,13 +695,15 @@
                                     <p data-i18n="happening.japan.body">ثقافة كاواي، وأنمي، وأزياء، وأوريغامي وصور.</p>
                               </div>
                         </article>
-                        <article class="program-card reveal" data-category="adventure">
+                        <article class="program-card reveal" data-program="camping" tabindex="0" data-category="adventure">
                               <div class="program-image">
-                                    <img style="object-position:50% 35%"
-                                          sizes="(max-width: 650px) 90vw, (max-width: 1000px) 45vw, 40vw"
-                                          srcset="assets/photographic/program-7-small.webp 487w, assets/photographic/program-7.webp 525w"
-                                          src="assets/photographic/program-7.webp" loading="lazy" width="525"
-                                          height="700" alt="يوم التخييم للبنات" data-alt="happening.camping.title">
+                                    <img src="assets/programs/camping-activity-480.webp"
+                                          srcset="assets/programs/camping-activity-480.webp 480w, assets/programs/camping-activity-960.webp 960w"
+                                          sizes="(max-width: 650px) 90vw, (max-width: 1100px) 45vw, 23vw"
+                                          loading="lazy" decoding="async" width="960" height="640"
+                                          alt="يوم التخييم للبنات" data-alt="happening.camping.title">
+                              <span class="program-category" data-i18n="happening.filter.adventure">مغامرات خفيفة</span>
+                                    <span class="program-emblem" aria-hidden="true">🏕️</span>
                               </div>
                               <div class="program-copy">
                                     <span class="program-number" aria-hidden="true">08</span>
@@ -1927,6 +1933,8 @@
             document.body.appendChild(trail);
             document.body.appendChild(cursor);
 
+            let activeProgramIcon = null;
+            const cursorSymbol = cursor.querySelector("span");
             const flowers = ["✿", "❀", "✾", "✿", "❀"];
             const colors = [
                   "#f2a4bc",
@@ -1963,7 +1971,7 @@
 
                   flower.className = "flower-trail-particle";
                   flower.textContent =
-                        flowers[Math.floor(Math.random() * flowers.length)];
+                        activeProgramIcon || flowers[Math.floor(Math.random() * flowers.length)];
 
                   const color =
                         colors[Math.floor(Math.random() * colors.length)];
@@ -2017,6 +2025,13 @@
                   cursor.classList.add("is-visible");
 
                   const target = e.target;
+                  const program = target instanceof Element && target.closest(".program-card[data-program]");
+                  const programIcon = program ? program.querySelector(".program-emblem")?.textContent.trim() : null;
+                  if (programIcon !== activeProgramIcon) {
+                        activeProgramIcon = programIcon;
+                        cursorSymbol.textContent = activeProgramIcon || "✿";
+                        cursor.classList.toggle("is-program", Boolean(activeProgramIcon));
+                  }
 
                   const editing = target instanceof Element &&
                         target.closest(
