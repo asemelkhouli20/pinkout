@@ -65,12 +65,42 @@
     document.addEventListener('keydown', e => { if (e.key === 'Escape' && navigation.classList.contains('open')) closeMenu(true); });
     window.addEventListener('resize', () => { if (window.innerWidth > 1100) closeMenu(); }, {passive:true});
   }
+  let expandedWorld = 'passage';
+  const worldAnimations = new Set();
+  function finishWorldAnimations() {
+    for (const animation of worldAnimations) animation.cancel();
+    worldAnimations.clear();
+  }
+  reduced.addEventListener('change', finishWorldAnimations);
+  function animateWorld(element, frames, options) {
+    if (!element.animate) return;
+    const animation = element.animate(frames, options);
+    worldAnimations.add(animation);
+    const cleanup = () => worldAnimations.delete(animation);
+    animation.addEventListener('finish', cleanup, {once:true});
+    animation.addEventListener('cancel', cleanup, {once:true});
+  }
   function setWorld(key, animate = true) {
+    const shouldAnimate = animate && !reduced.matches && !motionPaused;
+    const cards = $$('.world-card');
+    const previousRects = shouldAnimate
+      ? new Map(cards.map(element => [element, element.getBoundingClientRect()]))
+      : null;
+    // Continue from the visible positions when another card is chosen mid-animation.
+    finishWorldAnimations();
+    const previousWorld = expandedWorld;
+    if (animate) expandedWorld = key;
     selectedWorld = key;
+    const panel = $('#world-panel');
+    const card = document.querySelector(`[data-world-card="${key}"]`);
+    if (panel.parentElement !== card) card.append(panel);
+    panel.hidden = !expandedWorld;
+    $$('.world-card').forEach(el => el.classList.toggle('is-expanded', Boolean(expandedWorld) && el === card));
     const world = worlds.find(w => w.key === key);
     $$('.world-button').forEach(el => {
-      const active = el.dataset.world === key;
+      const active = Boolean(expandedWorld) && el.dataset.world === key;
       el.classList.toggle('active', active); el.setAttribute('aria-pressed', String(active));
+      el.setAttribute('aria-expanded', String(active));
     });
     const image = $('.world-picture');
     image.src = `${imageDirectory}${world.image}.webp`;
@@ -84,30 +114,57 @@
     $('.world-heading').setAttribute('data-i18n', `inside.${key}.heading`);
     $('.world-description').textContent = tr(`world.${key}`);
     $('.world-description').setAttribute('data-i18n', `world.${key}`);
-    $('#world-detail').href = `#inside-${key}`;
+    $('#world-detail').dataset.world = key;
     $('#save-world').setAttribute('aria-pressed', String(saved.has(key)));
     $('#save-world').setAttribute('aria-label', tr(saved.has(key) ? 'ui.saved' : 'ui.save'));
     $('#save-world').innerHTML = heartIcon();
     $('#world-position').textContent = `${String(worlds.indexOf(world)+1).padStart(2,'0')} / 07`;
     $('#world-tags').replaceChildren(...tr(`inside.${key}.highlights`).split(' · ').slice(0,3).map(label => { const chip=document.createElement('span');chip.textContent=label;return chip; }));
-    if (animate) {
-      window.PinkOutMotion?.enter($('.world-panel-copy'),'copy');
-      window.PinkOutMotion?.enter($('.world-picture'),'photo');
-      window.PinkOutMotion?.schedule(true);
+    if (shouldAnimate) {
+      // Read final positions together before starting animations. Never scale card text.
+      const movements = cards.map(element => {
+        const before = previousRects.get(element);
+        const after = element.getBoundingClientRect();
+        return {element, x: before.left - after.left, y: before.top - after.top};
+      });
+      for (const {element, x, y} of movements) {
+        const changedSize = element === card || element.dataset.worldCard === previousWorld;
+        if (Math.abs(x) + Math.abs(y) > 1) {
+          animateWorld(element, [
+            {transform: `translate(${x}px, ${y}px)`, opacity: changedSize ? .35 : 1},
+            {transform: 'translate(0, 0)', opacity: 1}
+          ], {
+            duration: 460,
+            easing: 'cubic-bezier(.22, 1, .36, 1)'
+          });
+        }
+      }
+      animateWorld(panel, [{opacity: 0}, {opacity: 1}], {
+        duration: 280,
+        delay: 100,
+        fill: 'backwards',
+        easing: 'ease-out'
+      });
     }
+    if (animate) window.PinkOutMotion?.schedule(true);
 
   }
-  function stepWorld(delta) {
+  function stepWorld(delta, control) {
     const index = worlds.findIndex(w => w.key === selectedWorld);
     const key = worlds[(index + delta + worlds.length) % worlds.length].key;
     setWorld(key);
     const selected = document.querySelector(`[data-world="${key}"]`);
-    selected.focus({preventScroll:true});
-    selected.scrollIntoView({behavior:reduced.matches||motionPaused?'auto':'smooth',block:'nearest',inline:'center'});
+    const focusTarget = control || selected;
+    focusTarget.focus({preventScroll:true});
+    focusTarget.scrollIntoView({behavior:reduced.matches||motionPaused?'auto':'smooth',block:'nearest',inline:'nearest'});
   }
-  $('#world-prev').addEventListener('click', () => stepWorld(-1));
-  $('#world-next').addEventListener('click', () => stepWorld(1));
-  $$('.world-button').forEach(el => el.addEventListener('click', () => setWorld(el.dataset.world)));
+  $('#world-prev').addEventListener('click', e => stepWorld(-1, e.currentTarget));
+  $('#world-next').addEventListener('click', e => stepWorld(1, e.currentTarget));
+  $$('.world-button').forEach(el => {
+    el.addEventListener('click', () => {
+      if (expandedWorld !== el.dataset.world) setWorld(el.dataset.world);
+    });
+  });
   $('.world-list').addEventListener('keydown', e => {
     const buttons = $$('.world-button'); const index = buttons.indexOf(document.activeElement);
     if (index < 0 || !['ArrowDown','ArrowUp','ArrowLeft','ArrowRight','Home','End'].includes(e.key)) return;
@@ -118,6 +175,57 @@
     else { const forward = e.key === 'ArrowDown' || e.key === (locale === 'ar' ? 'ArrowLeft' : 'ArrowRight'); next = (index + (forward ? 1 : -1) + buttons.length) % buttons.length; }
     buttons[next].focus(); buttons[next].click();
   });
+  const worldDetails = $('#world-details');
+  let worldDetailsReturnFocus = null;
+  let worldDetailsKey = 'passage';
+  function openWorldDetails(key, trigger = $('#world-detail')) {
+    const world = worlds.find(item => item.key === key);
+    if (!world) return;
+    const alreadyOpen = worldDetails.open;
+    worldDetailsKey = key;
+    $('#world-details-position').textContent = `${String(worlds.indexOf(world) + 1).padStart(2, '0')} / ${String(worlds.length).padStart(2, '0')}`;
+    $$('.world-detail-story').forEach(story => { story.hidden = story.id !== `inside-${key}`; });
+    $('#world-details-title').textContent = world.name;
+    if (!alreadyOpen) {
+      worldDetailsReturnFocus = trigger;
+      worldDetails.showModal();
+    }
+    document.body.classList.add('scroll-lock');
+    $('.world-details-body').scrollTop = 0;
+    if (!alreadyOpen) $('#world-details-close').focus({preventScroll:true});
+  }
+  function stepWorldDetails(delta, control) {
+    const index = worlds.findIndex(world => world.key === worldDetailsKey);
+    openWorldDetails(worlds[(index + delta + worlds.length) % worlds.length].key);
+    control?.focus({preventScroll:true});
+  }
+  $('#world-details-prev').addEventListener('click', e => stepWorldDetails(-1, e.currentTarget));
+  $('#world-details-next').addEventListener('click', e => stepWorldDetails(1, e.currentTarget));
+  worldDetails.addEventListener('keydown', e => {
+    if (!['ArrowLeft', 'ArrowRight'].includes(e.key) || e.altKey || e.ctrlKey || e.metaKey) return;
+    if (e.target.closest('input, textarea, select, [contenteditable="true"]')) return;
+    e.preventDefault();
+    stepWorldDetails(e.key === (locale === 'ar' ? 'ArrowLeft' : 'ArrowRight') ? 1 : -1);
+  });
+  $('#world-detail').addEventListener('click', e => openWorldDetails(selectedWorld, e.currentTarget));
+  $('#world-details-close').addEventListener('click', () => worldDetails.close());
+  worldDetails.addEventListener('click', e => {
+    if (e.target === worldDetails) worldDetails.close();
+    if (e.target.closest('a[href="#worlds"]')) {
+      e.preventDefault();
+      worldDetails.close();
+    }
+  });
+  worldDetails.addEventListener('close', () => {
+    if (!$('#lightbox').open) document.body.classList.remove('scroll-lock');
+    worldDetailsReturnFocus?.focus({preventScroll:true});
+  });
+  // Preserve links to the former detail sections, including bookmarked URLs.
+  function openWorldDetailsFromHash() {
+    const key = location.hash.startsWith('#inside-') ? location.hash.slice(8) : null;
+    if (worlds.some(world => world.key === key)) openWorldDetails(key);
+  }
+  window.addEventListener('hashchange', openWorldDetailsFromHash);
   $('#save-world').addEventListener('click', e => {
     saved.has(selectedWorld) ? saved.delete(selectedWorld) : saved.add(selectedWorld);
     $('#saved-count').textContent = String(saved.size);
@@ -146,6 +254,8 @@
     });
   }
   function updateDirectionalControls() {
+    $('#world-details-prev').innerHTML = icon(locale === 'ar' ? 'arrow-right' : 'arrow-left');
+    $('#world-details-next').innerHTML = icon(locale === 'ar' ? 'arrow-left' : 'arrow-right');
     $('#world-prev').innerHTML = icon(locale === 'ar' ? 'arrow-right' : 'arrow-left');
     $('#world-next').innerHTML = icon(locale === 'ar' ? 'arrow-left' : 'arrow-right');
     $('#lightbox-prev').innerHTML = icon(locale === 'ar' ? 'arrow-right' : 'arrow-left');
@@ -269,6 +379,7 @@
   });
   function syncMotion() {
     document.body.classList.toggle('motion-paused', motionPaused || reduced.matches);
+    if (motionPaused || reduced.matches) finishWorldAnimations();
     const control = $('#motion');
     control.hidden = reduced.matches;
     control.setAttribute('aria-pressed', String(motionPaused));
@@ -290,5 +401,5 @@
     },{rootMargin:'-20% 0px -55% 0px'});
     ['worlds','happening','gallery','entry','partners','faq'].forEach(id => navObserver.observe(document.getElementById(id)));
   }
-  applyTranslations(); syncMotion();
+  applyTranslations(); syncMotion(); openWorldDetailsFromHash();
 })();
