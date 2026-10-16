@@ -76,3 +76,7 @@ The hero uses transparent WebP stickers at 140, 280 and 420 pixels, selected thr
 All 12 originals total 18,819,589 bytes. The 12 optimized images total 61,754 bytes at 140px, 169,298 bytes at 280px, or 304,770 bytes at 420px (98.4–99.7% smaller). Browsers select one size per image according to display size and pixel density. These are asset-size measurements, not measured page-load times.
 
 To regenerate after changing the original PNG artwork, install the WebP `cwebp` command and run `python3 scripts/optimize-stickers.py`. Deploy the generated WebP files with `index.html`. All 36 generated images were verified to decode and all sticker image references were checked.
+
+## Search favicon
+
+Deploy `favicon.png` (96 × 96) and `favicon.ico` to the public web root together with the updated `index.html`. These use the existing PinkOut logo. The previous favicon declaration pointed to a rectangular SVG; the homepage now declares a square PNG and an ICO fallback at stable root URLs. `robots.txt` already permits crawling. After deployment, verify both icon URLs return HTTP 200 with image content, then request homepage indexing in Google Search Console. Google may take days to weeks to refresh the search icon.

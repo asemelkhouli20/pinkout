@@ -41,7 +41,7 @@ page.feed(html)
 assert len(page.ids) == len(set(page.ids)), 'Duplicate IDs'
 assert page.headings['h1'] == 1, 'Expected one main heading'
 for path in page.assets:
-    assert (ROOT / path).is_file(), f'Missing resource: {path}'
+    assert (ROOT / path.lstrip('/')).is_file(), f'Missing resource: {path}'
 for anchor in page.anchors:
     if anchor.startswith('#') and len(anchor) > 1:
         assert anchor[1:] in page.ids, f'Broken anchor: {anchor}'
